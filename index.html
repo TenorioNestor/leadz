@@ -1016,9 +1016,9 @@
 
     .plans {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 24px;
-      max-width: 840px;
+      max-width: 1100px;
       margin: 0 auto;
       align-items: stretch
     }
@@ -1026,7 +1026,7 @@
     .plan {
       background: #fff;
       border-radius: var(--radius-lg);
-      padding: 40px 36px;
+      padding: 36px 30px 32px;
       border: 1px solid var(--gray-200);
       box-shadow: var(--shadow-sm);
       display: flex;
@@ -1049,16 +1049,16 @@
 
     .plan .desc {
       color: var(--muted);
-      font-size: .95rem;
+      font-size: .9rem;
       margin-top: 4px;
-      margin-bottom: 22px
+      margin-bottom: 18px
     }
 
     .plan .price {
       font-family: var(--head);
       font-weight: 800;
       color: var(--navy);
-      font-size: 2.8rem;
+      font-size: 2.6rem;
       letter-spacing: -.03em;
       line-height: 1
     }
@@ -1070,25 +1070,56 @@
       letter-spacing: 0
     }
 
+    .plan-highlight {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      background: var(--gray-100);
+      border-radius: 12px;
+      padding: 13px 14px;
+      margin: 18px 0;
+      font-size: .875rem;
+      color: var(--muted);
+      font-weight: 500;
+      line-height: 1.4
+    }
+
+    .plan.pro .plan-highlight {
+      background: var(--green-soft);
+      color: #0d6b3e
+    }
+
+    .plan-highlight svg {
+      width: 18px;
+      height: 18px;
+      flex: none;
+      margin-top: 1px;
+      color: var(--muted-light)
+    }
+
+    .plan.pro .plan-highlight svg {
+      color: var(--green)
+    }
+
     .plan ul {
       list-style: none;
-      margin: 26px 0 30px;
+      margin: 4px 0 28px;
       display: flex;
       flex-direction: column;
-      gap: 13px
+      gap: 12px
     }
 
     .plan li {
       display: flex;
       align-items: flex-start;
-      gap: 11px;
+      gap: 10px;
       color: var(--ink);
-      font-size: .98rem
+      font-size: .93rem
     }
 
     .plan li svg {
-      width: 20px;
-      height: 20px;
+      width: 19px;
+      height: 19px;
       color: var(--green);
       flex: none;
       margin-top: 2px
@@ -1112,6 +1143,20 @@
       padding: 7px 16px;
       border-radius: 999px;
       box-shadow: 0 8px 18px -6px rgba(255, 193, 7, .6);
+      white-space: nowrap;
+    }
+
+    .badge-dark {
+      position: absolute;
+      top: -14px;
+      right: 28px;
+      background: var(--navy);
+      color: #fff;
+      font-family: var(--head);
+      font-weight: 700;
+      font-size: .8rem;
+      padding: 7px 14px;
+      border-radius: 999px;
       white-space: nowrap;
     }
 
@@ -1434,7 +1479,7 @@
 
       .plans {
         grid-template-columns: 1fr;
-        max-width: 480px
+        max-width: 520px
       }
 
       .plan.pro {
@@ -2238,7 +2283,7 @@
         </div>
         <div class="pain reveal d2">
           <span class="quote">“</span>
-          <p>Já tentei anúncio e joguei dinheiro fora.</p>
+          <p>Já fiz visita no fim de semana com quem nem sabia o que queria.</p>
         </div>
         <div class="pain reveal d3">
           <span class="quote">“</span>
@@ -2254,37 +2299,43 @@
     <div class="wrap">
       <div class="sec-head reveal">
         <div class="kicker">Histórias reais</div>
-        <h2>Quem usa, cresce.</h2>
+        <h2>O que o mercado nos trouxe</h2>
         <p>Profissionais como você que cansaram de esperar o telefone tocar.</p>
       </div>
       <div class="testi-grid">
         <div class="testi reveal d1">
           <span class="stars">★★★★★</span>
-          <div class="result">"Triplicou meus pedidos em 30 dias."</div>
-          <p class="body">Eu não acreditava que ia dar certo. Hoje meu WhatsApp não para. Tive que contratar um
-            ajudante.</p>
+          <div class="result">"Mudou o jogo!"</div>
+          <p class="body">Gerar leads no Whatsapp ou nas redes sociais até funciona, mas o processo manual de filtrar um
+            por um no WhatsApp é exaustivo. A gente perde horas em 'conversas fiadas' com curiosos. Uma plataforma que
+            já entrega o lead com a intenção real filtrada e pronta para agendar economizaria mais de 3 horas do meu dia
+          </p>
           <div class="who">
             <span class="ava" style="background:#0A1628">JS</span>
-            <div><b>João Silva</b><small>Eletricista · Curitiba</small></div>
+            <div><b>Patrícia</b><small>Corretora Autônoma</small></div>
           </div>
         </div>
         <div class="testi reveal d2">
           <span class="stars">★★★★★</span>
-          <div class="result">"Minha agenda fechou o mês inteiro."</div>
-          <p class="body">Antes ficava dependendo de indicação. Agora chega cliente novo todo dia, sem eu precisar fazer
-            nada.</p>
+          <div class="result">"Me ajudou muito a qualificar"</div>
+          <p class="body">Hoje, o tráfego pago está cada vez mais caro. De cada 10 leads que entram achando que têm a
+            intenção de comprar, a maioria acaba travando porque não tem a renda suficiente ou possui restrição no nome.
+            Descobrir isso só na hora da visita destrói o nosso ROI. Ter essa análise de crédito antes do contato é o
+            que o mercado precisa.</p>
           <div class="who">
             <span class="ava" style="background:#00A75F">CA</span>
-            <div><b>Carla Alves</b><small>Estética · São Paulo</small></div>
+            <div><b>David</b><small>Corretor de Imóveis</small></div>
           </div>
         </div>
         <div class="testi reveal d3">
           <span class="stars">★★★★★</span>
           <div class="result">"Investi pouco e o retorno veio rápido."</div>
-          <p class="body">Pela primeira vez senti que o anúncio valeu a pena. Em duas semanas já tinha pago o plano.</p>
+          <p class="body">Nosso maior desafio não é o clique no anúncio, é converter esse clique em uma visita real. O
+            cliente some, não atende o telefone ou desiste no meio do caminho. Saber exatamente quem tem perfil
+            comprador e pegar o lead já 'quente' muda completamente o jogo das imobiliárias.</p>
           <div class="who">
             <span class="ava" style="background:#F0B000">RM</span>
-            <div><b>Rafael Moura</b><small>Encanador · Belo Horizonte</small></div>
+            <div><b>André</b><small>Diretor de Vendas</small></div>
           </div>
         </div>
       </div>
@@ -2300,58 +2351,63 @@
         <p>Sem confusão. Sem letras miúdas. Você sabe exatamente o que paga.</p>
       </div>
       <div class="plans">
-        <div class="plan reveal d1" style="border:2px solid var(--amber)">
-          <span class="badge-pro"
-            style="background:var(--green);color:#fff;box-shadow:0 8px 18px -6px rgba(0,193,110,.5)">🎉 3 meses
-            grátis</span>
+
+        <!-- Starter -->
+        <div class="plan reveal d1">
           <div class="tag">Starter</div>
-          <div class="desc">Ideal pra quem está começando</div>
+          <div class="desc">Pra quem está começando agora</div>
           <div class="price">R$ 297<small>/mês</small></div>
+          <div class="plan-highlight">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            Pra quem ainda não atua como corretor em tempo integral
+          </div>
           <ul>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"
-                stroke-linejoin="round">
-                <path d="M20 6L9 17l-5-5" />
-              </svg>Anúncios criados e gerenciados</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"
-                stroke-linejoin="round">
-                <path d="M20 6L9 17l-5-5" />
-              </svg>Clientes direto no seu WhatsApp</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"
-                stroke-linejoin="round">
-                <path d="M20 6L9 17l-5-5" />
-              </svg>Relatório simples de resultados</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"
-                stroke-linejoin="round">
-                <path d="M20 6L9 17l-5-5" />
-              </svg>Suporte pelo WhatsApp</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Leads com <strong>&nbsp;interesse real&nbsp;</strong> de comprar imóvel</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><strong>Análise de crédito</strong>&nbsp; já incluída no lead</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Tudo direto no seu WhatsApp</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Suporte pelo WhatsApp</li>
           </ul>
           <button class="btn btn-green" onclick="openModal('Plano Starter')">Começar com o Starter</button>
         </div>
+
+        <!-- Pro -->
         <div class="plan pro reveal d2">
-          <span class="badge-pro">⚡ Mais escolhido</span>
+          <span class="badge-pro">Mais escolhido</span>
           <div class="tag">Pro</div>
-          <div class="desc">Mais alcance, mais clientes</div>
+          <div class="desc">Pro corretor em tempo integral</div>
           <div class="price">R$ 497<small>/mês</small></div>
+          <div class="plan-highlight">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            Pro corretor full-time, com um público mais seleto
+          </div>
           <ul>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"
-                stroke-linejoin="round">
-                <path d="M20 6L9 17l-5-5" />
-              </svg>Tudo do plano Starter</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"
-                stroke-linejoin="round">
-                <path d="M20 6L9 17l-5-5" />
-              </svg>Mais investimento em anúncios</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"
-                stroke-linejoin="round">
-                <path d="M20 6L9 17l-5-5" />
-              </svg>Mais alcance na sua região</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"
-                stroke-linejoin="round">
-                <path d="M20 6L9 17l-5-5" />
-              </svg>Otimização prioritária da equipe</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Tudo do plano Starter</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Anuncie até <strong>&nbsp;3 imóveis ao mesmo tempo</strong></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Você cadastra o imóvel, a gente acha o comprador</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Leads de público mais qualificado</li>
           </ul>
           <button class="btn btn-green" onclick="openModal('Plano Pro')">Quero o plano Pro</button>
         </div>
+
+        <!-- Star -->
+        <div class="plan reveal d3">
+          <span class="badge-dark">★ Pra equipes</span>
+          <div class="tag">Star</div>
+          <div class="desc">Pra escalar com volume</div>
+          <div class="price">R$ 897<small>/mês</small></div>
+          <div class="plan-highlight">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            Pra quem tem equipe de vendas e precisa de mais volume
+          </div>
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Tudo do plano Pro</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Anuncie <strong>quantos imóveis quiser</strong></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Volume de leads pra equipe inteira</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Gestão e otimização prioritárias</li>
+          </ul>
+          <button class="btn btn-green" onclick="openModal('Plano Star')">Falar sobre o Star</button>
+        </div>
+
       </div>
       <p class="pricing-note reveal">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"
