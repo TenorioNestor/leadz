@@ -871,13 +871,33 @@
   overlay.addEventListener('click',e=>{if(e.target===overlay)closeModal();});
   document.addEventListener('keydown',e=>{if(e.key==='Escape'&&overlay.classList.contains('show'))closeModal();});
 
+  const SUBMIT_BTN_HTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" width="19" height="19"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Quero receber leads qualificados';
+
+  function showFormError(msg){
+    let el=leadForm.querySelector('.form-err-msg');
+    if(!el){el=document.createElement('p');el.className='form-err-msg';el.style.cssText='color:#e53e3e;font-size:.86rem;font-weight:600;text-align:center;margin-top:4px';leadForm.appendChild(el);}
+    el.textContent=msg;
+  }
+  function clearFormError(){const el=leadForm.querySelector('.form-err-msg');if(el)el.textContent='';}
+
   leadForm.addEventListener('submit',async e=>{
     e.preventDefault();
+    clearFormError();
     let ok=true;
+
     leadForm.querySelectorAll('[required]').forEach(inp=>{
       inp.classList.remove('err');
       if(!inp.value.trim()){inp.classList.add('err');ok=false;}
     });
+
+    // Validar formato do e-mail
+    const emailInp=leadForm.querySelector('[name=email]');
+    if(emailInp && emailInp.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInp.value)){
+      emailInp.classList.add('err');
+      showFormError('Digite um e-mail válido (ex: joao@imobiliaria.com.br)');
+      ok=false;
+    }
+
     if(!ok)return;
 
     const dados=Object.fromEntries(new FormData(leadForm));
@@ -892,11 +912,14 @@
         body:JSON.stringify({...dados,data:new Date().toLocaleString('pt-BR')})
       });
       const json=await res.json();
-      if(!res.ok) throw new Error(json.error||'Erro no envio');
+      if(!res.ok){
+        const msg=json.errors?json.errors.map(er=>er.message||er.code).join(', '):json.error||'Erro ao enviar';
+        throw new Error(msg);
+      }
     }catch(err){
       submitBtn.disabled=false;
-      submitBtn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" width="19" height="19"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Quero receber leads qualificados';
-      alert('Erro ao enviar. Tente novamente.');
+      submitBtn.innerHTML=SUBMIT_BTN_HTML;
+      showFormError(err.message||'Erro ao enviar. Tente novamente.');
       return;
     }
 
