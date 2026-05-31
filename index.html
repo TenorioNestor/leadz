@@ -1054,6 +1054,33 @@
       margin-bottom: 18px
     }
 
+    .plan .price-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 2px
+    }
+
+    .plan .price-old {
+      font-family: var(--head);
+      font-weight: 700;
+      font-size: 1.15rem;
+      color: var(--muted-light);
+      text-decoration: line-through;
+      letter-spacing: -.01em
+    }
+
+    .plan .discount-tag {
+      background: #FF4D4D;
+      color: #fff;
+      font-family: var(--head);
+      font-weight: 800;
+      font-size: .72rem;
+      padding: 3px 9px;
+      border-radius: 999px;
+      letter-spacing: .01em
+    }
+
     .plan .price {
       font-family: var(--head);
       font-weight: 800;
@@ -2356,7 +2383,11 @@
         <div class="plan reveal d1">
           <div class="tag">Starter</div>
           <div class="desc">Pra quem está começando agora</div>
-          <div class="price">R$ 297<small>/mês</small></div>
+          <div class="price-row">
+            <span class="price-old">R$ 297</span>
+            <span class="discount-tag">50% OFF</span>
+          </div>
+          <div class="price">R$ 149<small>/mês</small></div>
           <div class="plan-highlight">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
             Pra quem ainda não atua como corretor em tempo integral
@@ -2375,7 +2406,11 @@
           <span class="badge-pro">Mais escolhido</span>
           <div class="tag">Pro</div>
           <div class="desc">Pro corretor em tempo integral</div>
-          <div class="price">R$ 497<small>/mês</small></div>
+          <div class="price-row">
+            <span class="price-old">R$ 497</span>
+            <span class="discount-tag">50% OFF</span>
+          </div>
+          <div class="price">R$ 249<small>/mês</small></div>
           <div class="plan-highlight">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
             Pro corretor full-time, com um público mais seleto
@@ -2394,7 +2429,11 @@
           <span class="badge-dark">★ Pra equipes</span>
           <div class="tag">Star</div>
           <div class="desc">Pra escalar com volume</div>
-          <div class="price">R$ 897<small>/mês</small></div>
+          <div class="price-row">
+            <span class="price-old">R$ 897</span>
+            <span class="discount-tag">50% OFF</span>
+          </div>
+          <div class="price">R$ 449<small>/mês</small></div>
           <div class="plan-highlight">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
             Pra quem tem equipe de vendas e precisa de mais volume
