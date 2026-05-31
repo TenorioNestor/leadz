@@ -358,6 +358,55 @@
     .phone{width:270px;height:560px}
   }
 
+  /* ---------- Promo bar ---------- */
+  .promo-bar{
+    position:sticky;top:0;z-index:65;
+    background:linear-gradient(90deg,#0A1628 0%,#0d2240 50%,#0A1628 100%);
+    color:#fff;padding:0 20px;height:46px;
+    display:flex;align-items:center;justify-content:center;gap:14px;
+    overflow:hidden;
+  }
+  .promo-bar:before{
+    content:"";position:absolute;inset:0;
+    background:radial-gradient(600px 80px at 50% 50%,rgba(0,193,110,.18),transparent 70%);
+    pointer-events:none;
+  }
+  .promo-fire{font-size:1.05rem;flex:none;animation:shake 2.4s ease-in-out infinite}
+  @keyframes shake{0%,100%{transform:rotate(-8deg)}50%{transform:rotate(8deg)}}
+  .promo-text{font-size:.88rem;font-family:var(--head);font-weight:600;text-align:center}
+  .promo-text strong{color:var(--amber)}
+  .promo-spots{
+    display:inline-flex;align-items:center;gap:6px;
+    background:rgba(255,193,7,.18);border:1px solid rgba(255,193,7,.4);
+    border-radius:999px;padding:3px 11px;font-size:.78rem;font-weight:700;
+    font-family:var(--head);color:var(--amber);white-space:nowrap;flex:none;
+  }
+  .spot-dot{width:7px;height:7px;border-radius:50%;background:var(--amber);animation:pulse 1.4s infinite}
+  .promo-cta{
+    flex:none;background:var(--green);color:#fff;border:0;cursor:pointer;
+    font-family:var(--head);font-weight:700;font-size:.82rem;
+    padding:7px 16px;border-radius:999px;white-space:nowrap;
+    transition:background .15s,transform .15s;
+    box-shadow:0 4px 12px -4px rgba(0,193,110,.5);
+  }
+  .promo-cta:hover{background:var(--green-dark);transform:translateY(-1px)}
+  .promo-close{
+    position:absolute;right:12px;top:50%;transform:translateY(-50%);
+    background:none;border:0;cursor:pointer;color:rgba(255,255,255,.5);
+    font-size:1.3rem;line-height:1;padding:4px 6px;transition:color .15s;
+  }
+  .promo-close:hover{color:#fff}
+  header.nav{top:46px}
+  header.nav.promo-gone{top:0}
+  @media(max-width:720px){
+    .promo-text .hide-mob{display:none}
+    .promo-bar{gap:8px;padding:0 36px 0 12px}
+    header.nav{top:46px}
+  }
+  @media(max-width:420px){
+    .promo-spots{display:none}
+  }
+
   /* ---------- Modal ---------- */
   .modal-overlay{
     position:fixed;inset:0;z-index:200;
@@ -420,6 +469,17 @@
 </head>
 <body>
 
+<!-- ============ PROMO BAR ============ -->
+<div class="promo-bar" id="promoBar">
+  <span class="promo-fire">🔥</span>
+  <span class="promo-text">
+    <strong>Promoção relâmpago:</strong> Primeiros <strong>10 corretores</strong><span class="hide-mob"> que se inscreverem têm</span> <strong style="color:var(--green)">3 meses GRÁTIS</strong>
+  </span>
+  <span class="promo-spots"><span class="spot-dot"></span><span id="spotsLeft">7</span> vagas restantes</span>
+  <button class="promo-cta" onclick="openModal('Promo Bar')">Quero minha vaga →</button>
+  <button class="promo-close" onclick="closePromo()" aria-label="Fechar">×</button>
+</div>
+
 <!-- ============ NAVBAR ============ -->
 <header class="nav" id="nav">
   <div class="wrap nav-inner">
@@ -460,7 +520,7 @@
     <div class="modal-hd">
       <span class="logo"><span class="mark"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2L4.5 13.5h6L9 22l9.5-12.5h-6L13 2z" fill="#fff"/></svg></span><span class="word">Lead<span style="position:relative">z<span class="dot"></span></span></span></span>
       <h2 id="modalTitle">Receba leads <span class="hl">pré-qualificados</span></h2>
-      <p>Preencha abaixo e nossa equipe entra em contato em até 24h.</p>
+      <p id="modalSub">Preencha abaixo e nossa equipe entra em contato em até 24h.</p>
     </div>
     <form class="form-grid" id="leadForm" novalidate>
       <input type="hidden" name="origem" id="formOrigem">
@@ -721,7 +781,8 @@
       <p>Sem confusão. Sem letras miúdas. Você sabe exatamente o que paga.</p>
     </div>
     <div class="plans">
-      <div class="plan reveal d1">
+      <div class="plan reveal d1" style="border:2px solid var(--amber)">
+        <span class="badge-pro" style="background:var(--green);color:#fff;box-shadow:0 8px 18px -6px rgba(0,193,110,.5)">🎉 3 meses grátis</span>
         <div class="tag">Starter</div>
         <div class="desc">Ideal pra quem está começando</div>
         <div class="price">R$ 297<small>/mês</small></div>
@@ -853,12 +914,20 @@
   const formSuccess=document.getElementById('formSuccess');
 
   function openModal(origem){
+    const isPromo = origem==='Promo Bar';
     document.getElementById('formOrigem').value=origem||'';
+    document.getElementById('modalTitle').innerHTML = isPromo
+      ? '🎉 Garanta seus <span class="hl">3 meses grátis</span>'
+      : 'Receba leads <span class="hl">pré-qualificados</span>';
+    document.getElementById('modalSub').textContent = isPromo
+      ? 'Vagas limitadas! Preencha agora e garanta acesso gratuito por 3 meses completos.'
+      : 'Preencha abaixo e nossa equipe entra em contato em até 24h.';
     overlay.classList.add('show');
     overlay.setAttribute('aria-hidden','false');
     document.body.style.overflow='hidden';
     leadForm.style.display='';
     formSuccess.classList.remove('show');
+    clearFormError();
     leadForm.querySelectorAll('.err').forEach(el=>el.classList.remove('err'));
     setTimeout(()=>{const f=leadForm.querySelector('input');if(f)f.focus();},340);
   }
@@ -866,6 +935,13 @@
     overlay.classList.remove('show');
     overlay.setAttribute('aria-hidden','true');
     document.body.style.overflow='';
+  }
+  function closePromo(){
+    const bar=document.getElementById('promoBar');
+    bar.style.height=bar.offsetHeight+'px';
+    bar.style.transition='height .3s ease, opacity .3s ease';
+    requestAnimationFrame(()=>{bar.style.height='0';bar.style.opacity='0';});
+    setTimeout(()=>{bar.style.display='none';document.getElementById('nav').classList.add('promo-gone');},320);
   }
   document.getElementById('modalClose').addEventListener('click',closeModal);
   overlay.addEventListener('click',e=>{if(e.target===overlay)closeModal();});
