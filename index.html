@@ -809,9 +809,11 @@
 
     .steps {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap: 24px;
-      position: relative
+      position: relative;
+      max-width: 860px;
+      margin-inline: auto
     }
 
     .step {
@@ -1360,12 +1362,16 @@
     .mobile-menu {
       display: none;
       position: fixed;
-      inset: 74px 0 auto 0;
+      inset: 120px 0 auto 0;
       z-index: 55;
       background: #fff;
       border-bottom: 1px solid var(--gray-200);
       box-shadow: var(--shadow);
       padding: 18px 24px 26px
+    }
+
+    .mobile-menu.promo-gone {
+      top: 74px
     }
 
     .mobile-menu.show {
@@ -1390,7 +1396,7 @@
     @media(max-width:980px) {
       .hero-grid {
         grid-template-columns: 1fr;
-        gap: 54px
+        gap: 40px
       }
 
       .phone-stage {
@@ -1404,7 +1410,7 @@
 
       .hero {
         text-align: center;
-        padding: 48px 0 70px
+        padding: 44px 0 64px
       }
 
       .eyebrow {
@@ -1425,6 +1431,15 @@
       .sec {
         padding: 72px 0
       }
+
+      .plans {
+        grid-template-columns: 1fr;
+        max-width: 480px
+      }
+
+      .plan.pro {
+        transform: none
+      }
     }
 
     @media(max-width:720px) {
@@ -1438,15 +1453,6 @@
         display: block
       }
 
-      .plans {
-        grid-template-columns: 1fr;
-        max-width: 440px
-      }
-
-      .plan.pro {
-        transform: none
-      }
-
       .float-chip {
         display: none
       }
@@ -1454,16 +1460,93 @@
       .foot-top {
         flex-direction: column
       }
+
+      .foot-cols {
+        gap: 32px
+      }
+
+      .hero {
+        padding: 36px 0 54px
+      }
+
+      .sec {
+        padding: 60px 0
+      }
+
+      .step {
+        padding: 28px 24px
+      }
+
+      .faq-q {
+        font-size: 1rem;
+        padding: 18px 20px
+      }
+
+      .cta-final .wrap {
+        padding: 60px 24px
+      }
+
+      .niche {
+        padding: 10px 16px;
+        font-size: .88rem
+      }
     }
 
-    @media(max-width:420px) {
+    @media(max-width:520px) {
       .wrap {
-        padding: 0 18px
+        padding: 0 16px
       }
 
       .phone {
-        width: 270px;
-        height: 560px
+        width: 260px;
+        height: 520px
+      }
+
+      .hero h1 {
+        font-size: clamp(1.85rem, 7.5vw, 2.6rem)
+      }
+
+      .hero-ctas {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px
+      }
+
+      .hero-ctas .btn {
+        justify-content: center
+      }
+
+      .social-proof {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 10px
+      }
+
+      .foot-bottom {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 10px
+      }
+
+      .sec-head h2 {
+        font-size: clamp(1.7rem, 6vw, 2.4rem)
+      }
+    }
+
+    @media(max-width:390px) {
+      .wrap {
+        padding: 0 14px
+      }
+
+      .phone {
+        width: 240px;
+        height: 490px
+      }
+
+      .plan .price {
+        font-size: 2.3rem
       }
     }
 
@@ -2151,7 +2234,7 @@
       <div class="pain-grid">
         <div class="pain reveal d1">
           <span class="quote">“</span>
-          <p>Não tenho tempo pra aprender a anunciar.</p>
+          <p>Perco tempo demais com cliente que no final não tem crédito aprovado.</p>
         </div>
         <div class="pain reveal d2">
           <span class="quote">“</span>
@@ -2449,7 +2532,7 @@
       bar.style.height = bar.offsetHeight + 'px';
       bar.style.transition = 'height .3s ease, opacity .3s ease';
       requestAnimationFrame(() => { bar.style.height = '0'; bar.style.opacity = '0'; });
-      setTimeout(() => { bar.style.display = 'none'; document.getElementById('nav').classList.add('promo-gone'); }, 320);
+      setTimeout(() => { bar.style.display = 'none'; document.getElementById('nav').classList.add('promo-gone'); document.getElementById('mobileMenu').classList.add('promo-gone'); }, 320);
     }
     document.getElementById('modalClose').addEventListener('click', closeModal);
     overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
