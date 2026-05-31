@@ -1,1033 +1,2531 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script>document.documentElement.className+=' js-reveal';</script>
-<title>Leadz — Leads imobiliários qualificados, com perfil e crédito, no seu WhatsApp</title>
-<link rel="icon" type="image/svg+xml" href="favicon.svg">
-<link rel="apple-touch-icon" href="favicon.svg">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --green:#00C16E;
-    --green-dark:#00A75F;
-    --green-soft:#E6F9F1;
-    --navy:#0A1628;
-    --navy-soft:#13233C;
-    --amber:#FFC107;
-    --amber-dark:#F0B000;
-    --white:#FFFFFF;
-    --gray-50:#F7F9F8;
-    --gray-100:#F5F5F5;
-    --gray-200:#EAEDEC;
-    --ink:#0A1628;
-    --muted:#5B6B7B;
-    --muted-light:#8A98A6;
-    --radius:18px;
-    --radius-lg:28px;
-    --shadow-sm:0 2px 10px rgba(10,22,40,.06);
-    --shadow:0 18px 50px -18px rgba(10,22,40,.20);
-    --shadow-green:0 16px 40px -12px rgba(0,193,110,.45);
-    --maxw:1180px;
-    --head:'Plus Jakarta Sans',system-ui,sans-serif;
-    --body:'Inter',system-ui,sans-serif;
-  }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>document.documentElement.className += ' js-reveal';</script>
+  <title>Leadz — Leads imobiliários qualificados, com perfil e crédito, no seu WhatsApp</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="apple-touch-icon" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --green: #00C16E;
+      --green-dark: #00A75F;
+      --green-soft: #E6F9F1;
+      --navy: #0A1628;
+      --navy-soft: #13233C;
+      --amber: #FFC107;
+      --amber-dark: #F0B000;
+      --white: #FFFFFF;
+      --gray-50: #F7F9F8;
+      --gray-100: #F5F5F5;
+      --gray-200: #EAEDEC;
+      --ink: #0A1628;
+      --muted: #5B6B7B;
+      --muted-light: #8A98A6;
+      --radius: 18px;
+      --radius-lg: 28px;
+      --shadow-sm: 0 2px 10px rgba(10, 22, 40, .06);
+      --shadow: 0 18px 50px -18px rgba(10, 22, 40, .20);
+      --shadow-green: 0 16px 40px -12px rgba(0, 193, 110, .45);
+      --maxw: 1180px;
+      --head: 'Plus Jakarta Sans', system-ui, sans-serif;
+      --body: 'Inter', system-ui, sans-serif;
+    }
 
-  *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
-  body{
-    font-family:var(--body);
-    color:var(--ink);
-    background:var(--white);
-    line-height:1.6;
-    -webkit-font-smoothing:antialiased;
-    overflow-x:hidden;
-  }
-  h1,h2,h3,h4{font-family:var(--head);line-height:1.1;letter-spacing:-.02em;font-weight:800}
-  a{text-decoration:none;color:inherit}
-  img{max-width:100%}
-  section{position:relative}
-  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
 
-  /* ---------- Buttons ---------- */
-  .btn{
-    display:inline-flex;align-items:center;justify-content:center;gap:9px;
-    font-family:var(--head);font-weight:700;font-size:1.02rem;
-    padding:15px 28px;border-radius:999px;border:0;cursor:pointer;
-    transition:transform .18s ease, box-shadow .18s ease, background .18s ease;
-    white-space:nowrap;
-  }
-  .btn svg{width:19px;height:19px}
-  .btn-green{background:var(--green);color:#fff;box-shadow:var(--shadow-green)}
-  .btn-green:hover{background:var(--green-dark);transform:translateY(-2px);box-shadow:0 22px 48px -12px rgba(0,193,110,.55)}
-  .btn-white{background:#fff;color:var(--navy);box-shadow:0 12px 30px -12px rgba(0,0,0,.3)}
-  .btn-white:hover{transform:translateY(-2px);box-shadow:0 20px 40px -12px rgba(0,0,0,.35)}
-  .btn-ghost{background:transparent;color:var(--ink);padding:15px 10px}
-  .btn-ghost:hover{color:var(--green)}
-  .btn-lg{font-size:1.12rem;padding:18px 34px}
+    html {
+      scroll-behavior: smooth
+    }
 
-  /* ---------- Logo ---------- */
-  .logo{display:inline-flex;align-items:center;gap:10px;font-family:var(--head);font-weight:800}
-  .logo .mark{
-    width:38px;height:38px;border-radius:11px;
-    background:linear-gradient(150deg,var(--green),#00D97A);
-    display:grid;place-items:center;box-shadow:0 6px 16px -4px rgba(0,193,110,.6);
-    flex:none;
-  }
-  .logo .mark svg{width:21px;height:21px}
-  .logo .word{font-size:1.5rem;letter-spacing:-.04em;color:var(--navy);position:relative}
-  .logo .word .dot{
-    display:inline-block;width:9px;height:9px;border-radius:50%;
-    background:var(--amber);margin-left:1px;vertical-align:super;
-    position:relative;top:-2px;
-  }
-  .nav-on-dark .word{color:#fff}
+    body {
+      font-family: var(--body);
+      color: var(--ink);
+      background: var(--white);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
 
-  /* ---------- Navbar ---------- */
-  header.nav{
-    position:sticky;top:0;z-index:60;
-    background:rgba(255,255,255,.82);
-    backdrop-filter:saturate(160%) blur(14px);
-    border-bottom:1px solid transparent;
-    transition:border-color .2s, box-shadow .2s;
-  }
-  header.nav.scrolled{border-bottom:1px solid var(--gray-200);box-shadow:0 4px 24px -16px rgba(10,22,40,.3)}
-  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:74px}
-  .nav-links{display:flex;align-items:center;gap:34px}
-  .nav-links a.link{font-weight:600;color:var(--muted);font-size:.98rem;transition:color .15s}
-  .nav-links a.link:hover{color:var(--navy)}
-  .nav-cta{display:flex;align-items:center;gap:8px}
-  .nav-toggle{display:none;background:none;border:0;cursor:pointer;padding:8px}
-  .nav-toggle svg{width:26px;height:26px;color:var(--navy)}
+    h1,
+    h2,
+    h3,
+    h4 {
+      font-family: var(--head);
+      line-height: 1.1;
+      letter-spacing: -.02em;
+      font-weight: 800
+    }
 
-  /* ---------- Hero ---------- */
-  .hero{
-    padding:72px 0 90px;
-    background:
-      radial-gradient(900px 480px at 78% -8%, rgba(0,193,110,.13), transparent 60%),
-      radial-gradient(700px 420px at 8% 12%, rgba(255,193,7,.10), transparent 55%),
-      linear-gradient(180deg,#fff,var(--gray-50));
-    overflow:hidden;
-  }
-  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:50px;align-items:center}
-  .eyebrow{
-    display:inline-flex;align-items:center;gap:9px;
-    background:var(--green-soft);color:var(--green-dark);
-    font-weight:700;font-size:.86rem;padding:7px 15px;border-radius:999px;
-    font-family:var(--head);
-  }
-  .eyebrow .pulse{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 0 0 rgba(0,193,110,.6);animation:pulse 2s infinite}
-  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(0,193,110,.5)}70%{box-shadow:0 0 0 10px rgba(0,193,110,0)}100%{box-shadow:0 0 0 0 rgba(0,193,110,0)}}
-  .hero h1{font-size:clamp(2.4rem,5vw,3.7rem);margin:22px 0 18px;color:var(--navy)}
-  .hero h1 .hl{color:var(--green);position:relative;white-space:nowrap}
-  .hero p.sub{font-size:1.18rem;color:var(--muted);max-width:520px;margin-bottom:30px}
-  .hero-ctas{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
-  .hero-ctas .link-down{font-weight:700;color:var(--navy);font-family:var(--head);display:inline-flex;align-items:center;gap:6px;padding:15px 6px}
-  .hero-ctas .link-down:hover{color:var(--green)}
-  .social-proof{display:flex;align-items:center;gap:14px;margin-top:34px}
-  .avatars{display:flex}
-  .avatars span{
-    width:40px;height:40px;border-radius:50%;border:3px solid #fff;margin-left:-12px;
-    background-size:cover;display:grid;place-items:center;color:#fff;font-weight:700;font-family:var(--head);font-size:.9rem;
-  }
-  .avatars span:first-child{margin-left:0}
-  .social-proof .txt{font-size:.95rem;color:var(--muted);line-height:1.35}
-  .social-proof .txt strong{color:var(--navy)}
-  .stars{color:var(--amber);letter-spacing:1px;font-size:.85rem}
+    a {
+      text-decoration: none;
+      color: inherit
+    }
 
-  /* ---------- Phone mockup ---------- */
-  .phone-stage{display:flex;justify-content:center;position:relative}
-  .blob{position:absolute;inset:0;z-index:0;filter:blur(10px)}
-  .phone{
-    position:relative;z-index:2;width:300px;height:610px;
-    background:#0c1a2e;border-radius:42px;padding:13px;
-    box-shadow:0 40px 80px -30px rgba(10,22,40,.55), inset 0 0 0 2px rgba(255,255,255,.06);
-    animation:float 6s ease-in-out infinite;
-  }
-  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
-  .phone .screen{
-    position:relative;width:100%;height:100%;background:#0b141a;border-radius:31px;overflow:hidden;
-    display:flex;flex-direction:column;
-  }
-  .wa-top{background:#1f2c34;padding:46px 16px 13px;display:flex;align-items:center;gap:11px;color:#e9edef}
-  .wa-top .notch{position:absolute;top:14px;left:50%;transform:translateX(-50%);width:120px;height:26px;background:#0c1a2e;border-radius:0 0 16px 16px}
-  .wa-top .ava{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--green),#00D97A);display:grid;place-items:center;flex:none}
-  .wa-top .ava svg{width:20px;height:20px;color:#fff}
-  .wa-top .who b{font-size:.95rem;display:block;font-family:var(--head)}
-  .wa-top .who small{font-size:.72rem;color:#8696a0}
-  .wa-body{flex:1;background:#0b141a;padding:16px 13px;display:flex;flex-direction:column;gap:11px;overflow:hidden;
-    background-image:radial-gradient(rgba(255,255,255,.025) 1px, transparent 0);background-size:18px 18px}
-  .lead-card{
-    background:#202c33;color:#e9edef;border-radius:14px 14px 14px 4px;padding:11px 13px;
-    box-shadow:0 6px 14px rgba(0,0,0,.25);position:relative;
-    animation:popIn .5s both;
-  }
-  .lead-card .name{font-family:var(--head);font-weight:700;font-size:.88rem;color:#fff;display:flex;align-items:center;gap:6px}
-  .lead-card .name .new{background:var(--green);color:#04130c;font-size:.6rem;font-weight:800;padding:2px 6px;border-radius:6px;font-family:var(--head)}
-  .lead-card .msg{font-size:.78rem;color:#c5d0d6;margin-top:3px;line-height:1.4}
-  .lead-card .time{font-size:.62rem;color:#7d8c95;text-align:right;margin-top:4px}
-  .lead-prof{display:flex;flex-direction:column;gap:7px;margin-top:10px}
-  .lead-prof .row{display:flex;align-items:center;gap:9px;font-size:.74rem;color:#c5d0d6}
-  .lead-prof .row svg{width:15px;height:15px;color:#00C16E;flex:none}
-  .lead-prof .row b{color:#fff;font-weight:600}
-  .lead-credit{margin-top:11px;background:rgba(0,193,110,.16);border:1px solid rgba(0,193,110,.45);border-radius:11px;padding:9px 12px;display:flex;align-items:center;gap:10px}
-  .lead-credit .cic{width:30px;height:30px;border-radius:8px;background:rgba(0,193,110,.25);display:grid;place-items:center;flex:none}
-  .lead-credit .cic svg{width:17px;height:17px;color:#00E08A}
-  .lead-credit .v{font-family:var(--head);font-weight:700;color:#fff;font-size:.86rem;line-height:1.1}
-  .lead-credit small{color:#9fb6c4;font-size:.62rem;display:block;margin-top:1px}
-  @keyframes popIn{0%{opacity:0;transform:translateY(16px) scale(.96)}100%{opacity:1;transform:none}}
-  .wa-input{background:#1f2c34;padding:10px 13px 16px;display:flex;align-items:center;gap:9px}
-  .wa-input .pill{flex:1;background:#2a3942;border-radius:999px;height:34px;display:flex;align-items:center;padding:0 14px;color:#8696a0;font-size:.78rem}
-  .wa-input .send{width:34px;height:34px;border-radius:50%;background:var(--green);display:grid;place-items:center;flex:none}
-  .wa-input .send svg{width:16px;height:16px;color:#04130c}
-  /* floating notification chip */
-  .float-chip{
-    position:absolute;z-index:3;background:#fff;border-radius:14px;padding:11px 14px;
-    box-shadow:var(--shadow);display:flex;align-items:center;gap:10px;font-size:.82rem;font-weight:600;
-  }
-  .float-chip .ic{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;flex:none}
-  .chip-1{top:38px;left:-44px;animation:bob 4.5s ease-in-out infinite}
-  .chip-2{bottom:96px;right:-40px;animation:bob 5.2s ease-in-out infinite .6s}
-  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
-  .float-chip small{display:block;font-weight:500;color:var(--muted);font-size:.72rem}
-  .float-chip b{font-family:var(--head)}
+    img {
+      max-width: 100%
+    }
 
-  /* ---------- Niches bar ---------- */
-  .niches{padding:46px 0;border-top:1px solid var(--gray-200);border-bottom:1px solid var(--gray-200);background:#fff}
-  .niches .label{text-align:center;color:var(--muted);font-weight:600;margin-bottom:26px;font-size:1rem}
-  .niche-row{display:flex;flex-wrap:wrap;justify-content:center;gap:14px}
-  .niche{
-    display:inline-flex;align-items:center;gap:10px;background:var(--gray-100);
-    padding:12px 20px;border-radius:999px;font-weight:700;font-family:var(--head);color:var(--navy);font-size:.96rem;
-    transition:transform .15s,background .15s;
-  }
-  .niche:hover{transform:translateY(-3px);background:var(--green-soft)}
-  .niche svg{width:20px;height:20px;color:var(--green)}
+    section {
+      position: relative
+    }
 
-  /* ---------- Section heading ---------- */
-  .sec{padding:96px 0}
-  .sec-head{text-align:center;max-width:640px;margin:0 auto 56px}
-  .kicker{font-family:var(--head);font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:.12em;font-size:.82rem;margin-bottom:14px}
-  .sec-head h2{font-size:clamp(2rem,3.6vw,2.85rem);color:var(--navy)}
-  .sec-head p{color:var(--muted);font-size:1.12rem;margin-top:16px}
+    .wrap {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 0 24px
+    }
 
-  /* ---------- Como funciona ---------- */
-  .steps-sec{background:var(--gray-100)}
-  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;position:relative}
-  .step{
-    background:#fff;border-radius:var(--radius-lg);padding:38px 32px;box-shadow:var(--shadow-sm);
-    border:1px solid var(--gray-200);position:relative;overflow:hidden;
-  }
-  .step .num{font-family:var(--head);font-weight:800;font-size:3.4rem;color:var(--green-soft);line-height:1;letter-spacing:-.04em}
-  .step .ic{
-    width:54px;height:54px;border-radius:15px;background:var(--green-soft);display:grid;place-items:center;
-    margin:-30px 0 20px auto;position:relative;
-  }
-  .step .ic svg{width:26px;height:26px;color:var(--green-dark)}
-  .step h3{font-size:1.32rem;color:var(--navy);margin-bottom:10px}
-  .step p{color:var(--muted);font-size:1rem}
-  .step .bar{position:absolute;left:0;top:0;height:4px;width:100%;background:linear-gradient(90deg,var(--green),#00D97A)}
+    /* ---------- Buttons ---------- */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      font-family: var(--head);
+      font-weight: 700;
+      font-size: 1.02rem;
+      padding: 15px 28px;
+      border-radius: 999px;
+      border: 0;
+      cursor: pointer;
+      transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+      white-space: nowrap;
+    }
 
-  /* ---------- Para quem é ---------- */
-  .pains{background:var(--navy);color:#fff}
-  .pains:before{content:"";position:absolute;inset:0;background:radial-gradient(700px 360px at 85% 0,rgba(0,193,110,.16),transparent 60%);pointer-events:none}
-  .pains .sec-head h2{color:#fff}
-  .pains .kicker{color:var(--amber)}
-  .pain-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;position:relative}
-  .pain{
-    background:#fff;color:var(--navy);border-radius:var(--radius-lg);padding:34px 30px;
-    box-shadow:0 30px 60px -30px rgba(0,0,0,.5);position:relative;
-  }
-  .pain .quote{font-family:var(--head);font-size:4rem;line-height:.6;color:var(--green-soft);height:34px;display:block}
-  .pain p{font-size:1.18rem;font-weight:600;font-family:var(--head);color:var(--navy);letter-spacing:-.01em}
-  .pains .closer{text-align:center;margin-top:46px;font-size:1.3rem;font-family:var(--head);font-weight:700;color:#fff}
-  .pains .closer span{color:var(--green)}
+    .btn svg {
+      width: 19px;
+      height: 19px
+    }
 
-  /* ---------- Depoimentos ---------- */
-  .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-  .testi{
-    background:#fff;border:1px solid var(--gray-200);border-radius:var(--radius-lg);padding:30px;
-    box-shadow:var(--shadow-sm);display:flex;flex-direction:column;gap:16px;
-  }
-  .testi .stars{font-size:1rem}
-  .testi .result{font-family:var(--head);font-weight:800;font-size:1.32rem;color:var(--navy);letter-spacing:-.02em;line-height:1.2}
-  .testi .body{color:var(--muted);font-size:.98rem;flex:1}
-  .testi .who{display:flex;align-items:center;gap:12px;border-top:1px solid var(--gray-200);padding-top:16px}
-  .testi .who .ava{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:700;font-family:var(--head);flex:none}
-  .testi .who b{display:block;font-family:var(--head);font-size:.98rem;color:var(--navy)}
-  .testi .who small{color:var(--muted-light);font-size:.84rem}
+    .btn-green {
+      background: var(--green);
+      color: #fff;
+      box-shadow: var(--shadow-green)
+    }
 
-  /* ---------- Preços ---------- */
-  .pricing-sec{background:var(--gray-100)}
-  .plans{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;max-width:840px;margin:0 auto;align-items:stretch}
-  .plan{
-    background:#fff;border-radius:var(--radius-lg);padding:40px 36px;border:1px solid var(--gray-200);
-    box-shadow:var(--shadow-sm);display:flex;flex-direction:column;position:relative;
-  }
-  .plan.pro{border:2px solid var(--green);box-shadow:var(--shadow);transform:translateY(-6px)}
-  .plan .tag{font-family:var(--head);font-weight:700;color:var(--navy);font-size:1.18rem}
-  .plan .desc{color:var(--muted);font-size:.95rem;margin-top:4px;margin-bottom:22px}
-  .plan .price{font-family:var(--head);font-weight:800;color:var(--navy);font-size:2.8rem;letter-spacing:-.03em;line-height:1}
-  .plan .price small{font-size:1rem;font-weight:600;color:var(--muted);letter-spacing:0}
-  .plan ul{list-style:none;margin:26px 0 30px;display:flex;flex-direction:column;gap:13px}
-  .plan li{display:flex;align-items:flex-start;gap:11px;color:var(--ink);font-size:.98rem}
-  .plan li svg{width:20px;height:20px;color:var(--green);flex:none;margin-top:2px}
-  .plan .btn{width:100%;margin-top:auto}
-  .badge-pro{
-    position:absolute;top:-14px;left:50%;transform:translateX(-50%);
-    background:var(--amber);color:var(--navy);font-family:var(--head);font-weight:800;font-size:.8rem;
-    padding:7px 16px;border-radius:999px;box-shadow:0 8px 18px -6px rgba(255,193,7,.6);white-space:nowrap;
-  }
-  .pricing-note{text-align:center;color:var(--muted);margin-top:30px;font-weight:600}
-  .pricing-note svg{width:17px;height:17px;color:var(--green);vertical-align:-3px;margin-right:5px}
+    .btn-green:hover {
+      background: var(--green-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 22px 48px -12px rgba(0, 193, 110, .55)
+    }
 
-  /* ---------- FAQ ---------- */
-  .faq-list{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:14px}
-  .faq-item{background:#fff;border:1px solid var(--gray-200);border-radius:var(--radius);overflow:hidden;transition:box-shadow .2s,border-color .2s}
-  .faq-item.open{box-shadow:var(--shadow);border-color:transparent}
-  .faq-q{
-    width:100%;text-align:left;background:none;border:0;cursor:pointer;
-    padding:22px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;
-    font-family:var(--head);font-weight:700;font-size:1.1rem;color:var(--navy);
-  }
-  .faq-q .chev{width:30px;height:30px;border-radius:50%;background:var(--green-soft);display:grid;place-items:center;flex:none;transition:transform .25s,background .2s}
-  .faq-q .chev svg{width:17px;height:17px;color:var(--green-dark)}
-  .faq-item.open .chev{transform:rotate(180deg);background:var(--green);}
-  .faq-item.open .chev svg{color:#fff}
-  .faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease}
-  .faq-a p{padding:0 24px 22px;color:var(--muted);font-size:1.02rem}
+    .btn-white {
+      background: #fff;
+      color: var(--navy);
+      box-shadow: 0 12px 30px -12px rgba(0, 0, 0, .3)
+    }
 
-  /* ---------- CTA final ---------- */
-  .cta-final{background:linear-gradient(150deg,var(--green),#00A75F);color:#fff;text-align:center;overflow:hidden}
-  .cta-final:before{content:"";position:absolute;inset:0;background:radial-gradient(600px 300px at 20% 120%,rgba(255,255,255,.18),transparent 60%)}
-  .cta-final .wrap{position:relative;padding:84px 24px}
-  .cta-final h2{font-size:clamp(2.1rem,4vw,3rem);color:#fff;max-width:680px;margin:0 auto 14px}
-  .cta-final p{font-size:1.15rem;opacity:.95;margin-bottom:34px}
-  .cta-final .btn-white{font-size:1.18rem;padding:19px 40px}
+    .btn-white:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 20px 40px -12px rgba(0, 0, 0, .35)
+    }
 
-  /* ---------- Footer ---------- */
-  footer{background:var(--navy);color:#9fb0c0;padding:60px 0 34px}
-  .foot-top{display:flex;justify-content:space-between;align-items:flex-start;gap:30px;flex-wrap:wrap;padding-bottom:34px;border-bottom:1px solid rgba(255,255,255,.1)}
-  .foot-top .lead{max-width:320px}
-  .foot-top .lead p{margin-top:14px;font-size:.95rem;color:#7e90a2}
-  .foot-cols{display:flex;gap:60px;flex-wrap:wrap}
-  .foot-col h5{font-family:var(--head);color:#fff;font-size:.95rem;margin-bottom:14px}
-  .foot-col a{display:block;color:#9fb0c0;font-size:.92rem;padding:5px 0;transition:color .15s}
-  .foot-col a:hover{color:var(--green)}
-  .foot-bottom{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding-top:26px;font-size:.88rem;color:#7e90a2}
-  .socials{display:flex;gap:10px}
-  .socials a{width:40px;height:40px;border-radius:11px;background:rgba(255,255,255,.07);display:grid;place-items:center;transition:background .15s,transform .15s}
-  .socials a:hover{background:var(--green);transform:translateY(-2px)}
-  .socials a svg{width:19px;height:19px;color:#fff}
+    .btn-ghost {
+      background: transparent;
+      color: var(--ink);
+      padding: 15px 10px
+    }
 
-  /* ---------- Scroll reveal ---------- */
-  .js-reveal .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1)}
-  .js-reveal .reveal.visible{opacity:1;transform:none}
-  .reveal.d1{transition-delay:.08s}.reveal.d2{transition-delay:.16s}.reveal.d3{transition-delay:.24s}
+    .btn-ghost:hover {
+      color: var(--green)
+    }
 
-  /* ---------- Mobile menu ---------- */
-  .mobile-menu{display:none;position:fixed;inset:74px 0 auto 0;z-index:55;background:#fff;border-bottom:1px solid var(--gray-200);box-shadow:var(--shadow);padding:18px 24px 26px}
-  .mobile-menu.show{display:block}
-  .mobile-menu a.link{display:block;padding:13px 0;font-weight:600;color:var(--navy);font-family:var(--head);border-bottom:1px solid var(--gray-100)}
-  .mobile-menu .btn{width:100%;margin-top:18px}
+    .btn-lg {
+      font-size: 1.12rem;
+      padding: 18px 34px
+    }
 
-  /* ---------- Responsive ---------- */
-  @media(max-width:980px){
-    .hero-grid{grid-template-columns:1fr;gap:54px}
-    .phone-stage{order:-1}
-    .hero p.sub{margin-left:auto;margin-right:auto}
-    .hero{text-align:center;padding:48px 0 70px}
-    .eyebrow{margin:0 auto}
-    .hero-ctas,.social-proof{justify-content:center}
-    .steps,.pain-grid,.testi-grid{grid-template-columns:1fr}
-    .sec{padding:72px 0}
-  }
-  @media(max-width:720px){
-    .nav-links,.nav-cta .btn{display:none}
-    .nav-toggle{display:block}
-    .plans{grid-template-columns:1fr;max-width:440px}
-    .plan.pro{transform:none}
-    .float-chip{display:none}
-    .foot-top{flex-direction:column}
-  }
-  @media(max-width:420px){
-    .wrap{padding:0 18px}
-    .phone{width:270px;height:560px}
-  }
+    /* ---------- Logo ---------- */
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--head);
+      font-weight: 800
+    }
 
-  /* ---------- Promo bar ---------- */
-  .promo-bar{
-    position:sticky;top:0;z-index:65;
-    background:linear-gradient(90deg,#0A1628 0%,#0d2240 50%,#0A1628 100%);
-    color:#fff;padding:0 20px;height:46px;
-    display:flex;align-items:center;justify-content:center;gap:14px;
-    overflow:hidden;
-  }
-  .promo-bar:before{
-    content:"";position:absolute;inset:0;
-    background:radial-gradient(600px 80px at 50% 50%,rgba(0,193,110,.18),transparent 70%);
-    pointer-events:none;
-  }
-  .promo-fire{font-size:1.05rem;flex:none;animation:shake 2.4s ease-in-out infinite}
-  @keyframes shake{0%,100%{transform:rotate(-8deg)}50%{transform:rotate(8deg)}}
-  .promo-text{font-size:.88rem;font-family:var(--head);font-weight:600;text-align:center}
-  .promo-text strong{color:var(--amber)}
-  .promo-spots{
-    display:inline-flex;align-items:center;gap:6px;
-    background:rgba(255,193,7,.18);border:1px solid rgba(255,193,7,.4);
-    border-radius:999px;padding:3px 11px;font-size:.78rem;font-weight:700;
-    font-family:var(--head);color:var(--amber);white-space:nowrap;flex:none;
-  }
-  .spot-dot{width:7px;height:7px;border-radius:50%;background:var(--amber);animation:pulse 1.4s infinite}
-  .promo-cta{
-    flex:none;background:var(--green);color:#fff;border:0;cursor:pointer;
-    font-family:var(--head);font-weight:700;font-size:.82rem;
-    padding:7px 16px;border-radius:999px;white-space:nowrap;
-    transition:background .15s,transform .15s;
-    box-shadow:0 4px 12px -4px rgba(0,193,110,.5);
-  }
-  .promo-cta:hover{background:var(--green-dark);transform:translateY(-1px)}
-  .promo-close{
-    position:absolute;right:12px;top:50%;transform:translateY(-50%);
-    background:none;border:0;cursor:pointer;color:rgba(255,255,255,.5);
-    font-size:1.3rem;line-height:1;padding:4px 6px;transition:color .15s;
-  }
-  .promo-close:hover{color:#fff}
-  header.nav{top:46px}
-  header.nav.promo-gone{top:0}
-  @media(max-width:720px){
-    .promo-text .hide-mob{display:none}
-    .promo-bar{gap:8px;padding:0 36px 0 12px}
-    header.nav{top:46px}
-  }
-  @media(max-width:420px){
-    .promo-spots{display:none}
-  }
+    .logo .mark {
+      width: 38px;
+      height: 38px;
+      border-radius: 11px;
+      background: linear-gradient(150deg, var(--green), #00D97A);
+      display: grid;
+      place-items: center;
+      box-shadow: 0 6px 16px -4px rgba(0, 193, 110, .6);
+      flex: none;
+    }
 
-  /* ---------- Modal ---------- */
-  .modal-overlay{
-    position:fixed;inset:0;z-index:200;
-    background:rgba(10,22,40,.68);backdrop-filter:blur(6px);
-    display:flex;align-items:center;justify-content:center;padding:20px;
-    opacity:0;pointer-events:none;transition:opacity .25s ease;
-  }
-  .modal-overlay.show{opacity:1;pointer-events:all}
-  .modal-box{
-    background:#fff;border-radius:var(--radius-lg);
-    width:100%;max-width:520px;max-height:92vh;overflow-y:auto;
-    padding:38px 36px;position:relative;
-    box-shadow:0 48px 96px -24px rgba(10,22,40,.5);
-    transform:translateY(30px) scale(.97);
-    transition:transform .32s cubic-bezier(.22,.61,.36,1);
-    scrollbar-width:thin;
-  }
-  .modal-overlay.show .modal-box{transform:none}
-  .modal-close{
-    position:absolute;top:14px;right:14px;width:36px;height:36px;
-    border-radius:50%;border:0;background:var(--gray-100);cursor:pointer;
-    display:grid;place-items:center;transition:background .15s;
-  }
-  .modal-close:hover{background:var(--gray-200)}
-  .modal-close svg{width:18px;height:18px;color:var(--muted)}
-  .modal-hd{text-align:center;margin-bottom:26px}
-  .modal-hd .logo{justify-content:center;margin-bottom:14px}
-  .modal-hd h2{font-family:var(--head);font-size:1.52rem;color:var(--navy);margin:0 0 8px;font-weight:800;line-height:1.2;letter-spacing:-.02em}
-  .modal-hd h2 .hl{color:var(--green)}
-  .modal-hd p{color:var(--muted);font-size:.93rem}
-  .form-grid{display:flex;flex-direction:column;gap:14px}
-  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-  .field{display:flex;flex-direction:column;gap:5px}
-  .field label{font-family:var(--head);font-weight:700;font-size:.84rem;color:var(--navy)}
-  .field label .opt{font-weight:500;color:var(--muted-light);font-size:.77rem}
-  .field input,.field select{
-    height:46px;border-radius:11px;border:1.5px solid var(--gray-200);
-    padding:0 13px;font-family:var(--body);font-size:.94rem;color:var(--ink);
-    outline:none;background:#fff;transition:border-color .15s,box-shadow .15s;
-  }
-  .field select{
-    appearance:none;-webkit-appearance:none;cursor:pointer;
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235B6B7B' stroke-width='2.2' stroke-linecap='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
-    background-repeat:no-repeat;background-position:right 11px center;background-size:17px;padding-right:34px;
-  }
-  .field input:focus,.field select:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(0,193,110,.14)}
-  .field input.err,.field select.err{border-color:#e53e3e;box-shadow:0 0 0 3px rgba(229,62,62,.1)}
-  .form-note{text-align:center;font-size:.79rem;color:var(--muted-light);margin-top:2px}
-  .form-success{display:none;text-align:center;padding:14px 0 6px}
-  .form-success.show{display:block}
-  .suc-ic{width:70px;height:70px;border-radius:50%;background:var(--green-soft);display:grid;place-items:center;margin:0 auto 18px}
-  .suc-ic svg{width:34px;height:34px;color:var(--green)}
-  .form-success h3{font-family:var(--head);font-size:1.4rem;color:var(--navy);margin-bottom:8px;font-weight:800}
-  .form-success p{color:var(--muted);font-size:.95rem;line-height:1.55}
-  @media(max-width:520px){
-    .modal-box{padding:26px 18px}
-    .form-row{grid-template-columns:1fr}
-  }
-</style>
+    .logo .mark svg {
+      width: 21px;
+      height: 21px
+    }
+
+    .logo .word {
+      font-size: 1.5rem;
+      letter-spacing: -.04em;
+      color: var(--navy);
+      position: relative
+    }
+
+    .logo .word .dot {
+      display: inline-block;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--amber);
+      margin-left: 1px;
+      vertical-align: super;
+      position: relative;
+      top: -2px;
+    }
+
+    .nav-on-dark .word {
+      color: #fff
+    }
+
+    /* ---------- Navbar ---------- */
+    header.nav {
+      position: sticky;
+      top: 0;
+      z-index: 60;
+      background: rgba(255, 255, 255, .82);
+      backdrop-filter: saturate(160%) blur(14px);
+      border-bottom: 1px solid transparent;
+      transition: border-color .2s, box-shadow .2s;
+    }
+
+    header.nav.scrolled {
+      border-bottom: 1px solid var(--gray-200);
+      box-shadow: 0 4px 24px -16px rgba(10, 22, 40, .3)
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 74px
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 34px
+    }
+
+    .nav-links a.link {
+      font-weight: 600;
+      color: var(--muted);
+      font-size: .98rem;
+      transition: color .15s
+    }
+
+    .nav-links a.link:hover {
+      color: var(--navy)
+    }
+
+    .nav-cta {
+      display: flex;
+      align-items: center;
+      gap: 8px
+    }
+
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: 0;
+      cursor: pointer;
+      padding: 8px
+    }
+
+    .nav-toggle svg {
+      width: 26px;
+      height: 26px;
+      color: var(--navy)
+    }
+
+    /* ---------- Hero ---------- */
+    .hero {
+      padding: 72px 0 90px;
+      background:
+        radial-gradient(900px 480px at 78% -8%, rgba(0, 193, 110, .13), transparent 60%),
+        radial-gradient(700px 420px at 8% 12%, rgba(255, 193, 7, .10), transparent 55%),
+        linear-gradient(180deg, #fff, var(--gray-50));
+      overflow: hidden;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 50px;
+      align-items: center
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      background: var(--green-soft);
+      color: var(--green-dark);
+      font-weight: 700;
+      font-size: .86rem;
+      padding: 7px 15px;
+      border-radius: 999px;
+      font-family: var(--head);
+    }
+
+    .eyebrow .pulse {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 0 0 rgba(0, 193, 110, .6);
+      animation: pulse 2s infinite
+    }
+
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(0, 193, 110, .5)
+      }
+
+      70% {
+        box-shadow: 0 0 0 10px rgba(0, 193, 110, 0)
+      }
+
+      100% {
+        box-shadow: 0 0 0 0 rgba(0, 193, 110, 0)
+      }
+    }
+
+    .hero h1 {
+      font-size: clamp(2.4rem, 5vw, 3.7rem);
+      margin: 22px 0 18px;
+      color: var(--navy)
+    }
+
+    .hero h1 .hl {
+      color: var(--green);
+      position: relative;
+      white-space: nowrap
+    }
+
+    .hero p.sub {
+      font-size: 1.18rem;
+      color: var(--muted);
+      max-width: 520px;
+      margin-bottom: 30px
+    }
+
+    .hero-ctas {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap
+    }
+
+    .hero-ctas .link-down {
+      font-weight: 700;
+      color: var(--navy);
+      font-family: var(--head);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 15px 6px
+    }
+
+    .hero-ctas .link-down:hover {
+      color: var(--green)
+    }
+
+    .social-proof {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-top: 34px
+    }
+
+    .avatars {
+      display: flex
+    }
+
+    .avatars span {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 3px solid #fff;
+      margin-left: -12px;
+      background-size: cover;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      font-weight: 700;
+      font-family: var(--head);
+      font-size: .9rem;
+    }
+
+    .avatars span:first-child {
+      margin-left: 0
+    }
+
+    .social-proof .txt {
+      font-size: .95rem;
+      color: var(--muted);
+      line-height: 1.35
+    }
+
+    .social-proof .txt strong {
+      color: var(--navy)
+    }
+
+    .stars {
+      color: var(--amber);
+      letter-spacing: 1px;
+      font-size: .85rem
+    }
+
+    /* ---------- Phone mockup ---------- */
+    .phone-stage {
+      display: flex;
+      justify-content: center;
+      position: relative
+    }
+
+    .blob {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      filter: blur(10px)
+    }
+
+    .phone {
+      position: relative;
+      z-index: 2;
+      width: 300px;
+      height: 610px;
+      background: #0c1a2e;
+      border-radius: 42px;
+      padding: 13px;
+      box-shadow: 0 40px 80px -30px rgba(10, 22, 40, .55), inset 0 0 0 2px rgba(255, 255, 255, .06);
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0)
+      }
+
+      50% {
+        transform: translateY(-14px)
+      }
+    }
+
+    .phone .screen {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background: #0b141a;
+      border-radius: 31px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .wa-top {
+      background: #1f2c34;
+      padding: 46px 16px 13px;
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      color: #e9edef
+    }
+
+    .wa-top .notch {
+      position: absolute;
+      top: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 26px;
+      background: #0c1a2e;
+      border-radius: 0 0 16px 16px
+    }
+
+    .wa-top .ava {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--green), #00D97A);
+      display: grid;
+      place-items: center;
+      flex: none
+    }
+
+    .wa-top .ava svg {
+      width: 20px;
+      height: 20px;
+      color: #fff
+    }
+
+    .wa-top .who b {
+      font-size: .95rem;
+      display: block;
+      font-family: var(--head)
+    }
+
+    .wa-top .who small {
+      font-size: .72rem;
+      color: #8696a0
+    }
+
+    .wa-body {
+      flex: 1;
+      background: #0b141a;
+      padding: 16px 13px;
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+      overflow: hidden;
+      background-image: radial-gradient(rgba(255, 255, 255, .025) 1px, transparent 0);
+      background-size: 18px 18px
+    }
+
+    .lead-card {
+      background: #202c33;
+      color: #e9edef;
+      border-radius: 14px 14px 14px 4px;
+      padding: 11px 13px;
+      box-shadow: 0 6px 14px rgba(0, 0, 0, .25);
+      position: relative;
+      animation: popIn .5s both;
+    }
+
+    .lead-card .name {
+      font-family: var(--head);
+      font-weight: 700;
+      font-size: .88rem;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 6px
+    }
+
+    .lead-card .name .new {
+      background: var(--green);
+      color: #04130c;
+      font-size: .6rem;
+      font-weight: 800;
+      padding: 2px 6px;
+      border-radius: 6px;
+      font-family: var(--head)
+    }
+
+    .lead-card .msg {
+      font-size: .78rem;
+      color: #c5d0d6;
+      margin-top: 3px;
+      line-height: 1.4
+    }
+
+    .lead-card .time {
+      font-size: .62rem;
+      color: #7d8c95;
+      text-align: right;
+      margin-top: 4px
+    }
+
+    .lead-prof {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      margin-top: 10px
+    }
+
+    .lead-prof .row {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-size: .74rem;
+      color: #c5d0d6
+    }
+
+    .lead-prof .row svg {
+      width: 15px;
+      height: 15px;
+      color: #00C16E;
+      flex: none
+    }
+
+    .lead-prof .row b {
+      color: #fff;
+      font-weight: 600
+    }
+
+    .lead-credit {
+      margin-top: 11px;
+      background: rgba(0, 193, 110, .16);
+      border: 1px solid rgba(0, 193, 110, .45);
+      border-radius: 11px;
+      padding: 9px 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px
+    }
+
+    .lead-credit .cic {
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      background: rgba(0, 193, 110, .25);
+      display: grid;
+      place-items: center;
+      flex: none
+    }
+
+    .lead-credit .cic svg {
+      width: 17px;
+      height: 17px;
+      color: #00E08A
+    }
+
+    .lead-credit .v {
+      font-family: var(--head);
+      font-weight: 700;
+      color: #fff;
+      font-size: .86rem;
+      line-height: 1.1
+    }
+
+    .lead-credit small {
+      color: #9fb6c4;
+      font-size: .62rem;
+      display: block;
+      margin-top: 1px
+    }
+
+    @keyframes popIn {
+      0% {
+        opacity: 0;
+        transform: translateY(16px) scale(.96)
+      }
+
+      100% {
+        opacity: 1;
+        transform: none
+      }
+    }
+
+    .wa-input {
+      background: #1f2c34;
+      padding: 10px 13px 16px;
+      display: flex;
+      align-items: center;
+      gap: 9px
+    }
+
+    .wa-input .pill {
+      flex: 1;
+      background: #2a3942;
+      border-radius: 999px;
+      height: 34px;
+      display: flex;
+      align-items: center;
+      padding: 0 14px;
+      color: #8696a0;
+      font-size: .78rem
+    }
+
+    .wa-input .send {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: var(--green);
+      display: grid;
+      place-items: center;
+      flex: none
+    }
+
+    .wa-input .send svg {
+      width: 16px;
+      height: 16px;
+      color: #04130c
+    }
+
+    /* floating notification chip */
+    .float-chip {
+      position: absolute;
+      z-index: 3;
+      background: #fff;
+      border-radius: 14px;
+      padding: 11px 14px;
+      box-shadow: var(--shadow);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: .82rem;
+      font-weight: 600;
+    }
+
+    .float-chip .ic {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      flex: none
+    }
+
+    .chip-1 {
+      top: 38px;
+      left: -44px;
+      animation: bob 4.5s ease-in-out infinite
+    }
+
+    .chip-2 {
+      bottom: 96px;
+      right: -40px;
+      animation: bob 5.2s ease-in-out infinite .6s
+    }
+
+    @keyframes bob {
+
+      0%,
+      100% {
+        transform: translateY(0)
+      }
+
+      50% {
+        transform: translateY(-12px)
+      }
+    }
+
+    .float-chip small {
+      display: block;
+      font-weight: 500;
+      color: var(--muted);
+      font-size: .72rem
+    }
+
+    .float-chip b {
+      font-family: var(--head)
+    }
+
+    /* ---------- Niches bar ---------- */
+    .niches {
+      padding: 46px 0;
+      border-top: 1px solid var(--gray-200);
+      border-bottom: 1px solid var(--gray-200);
+      background: #fff
+    }
+
+    .niches .label {
+      text-align: center;
+      color: var(--muted);
+      font-weight: 600;
+      margin-bottom: 26px;
+      font-size: 1rem
+    }
+
+    .niche-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 14px
+    }
+
+    .niche {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--gray-100);
+      padding: 12px 20px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-family: var(--head);
+      color: var(--navy);
+      font-size: .96rem;
+      transition: transform .15s, background .15s;
+    }
+
+    .niche:hover {
+      transform: translateY(-3px);
+      background: var(--green-soft)
+    }
+
+    .niche svg {
+      width: 20px;
+      height: 20px;
+      color: var(--green)
+    }
+
+    /* ---------- Section heading ---------- */
+    .sec {
+      padding: 96px 0
+    }
+
+    .sec-head {
+      text-align: center;
+      max-width: 640px;
+      margin: 0 auto 56px
+    }
+
+    .kicker {
+      font-family: var(--head);
+      font-weight: 700;
+      color: var(--green);
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      font-size: .82rem;
+      margin-bottom: 14px
+    }
+
+    .sec-head h2 {
+      font-size: clamp(2rem, 3.6vw, 2.85rem);
+      color: var(--navy)
+    }
+
+    .sec-head p {
+      color: var(--muted);
+      font-size: 1.12rem;
+      margin-top: 16px
+    }
+
+    /* ---------- Como funciona ---------- */
+    .steps-sec {
+      background: var(--gray-100)
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      position: relative
+    }
+
+    .step {
+      background: #fff;
+      border-radius: var(--radius-lg);
+      padding: 38px 32px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--gray-200);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .step .num {
+      font-family: var(--head);
+      font-weight: 800;
+      font-size: 3.4rem;
+      color: var(--green-soft);
+      line-height: 1;
+      letter-spacing: -.04em
+    }
+
+    .step .ic {
+      width: 54px;
+      height: 54px;
+      border-radius: 15px;
+      background: var(--green-soft);
+      display: grid;
+      place-items: center;
+      margin: -30px 0 20px auto;
+      position: relative;
+    }
+
+    .step .ic svg {
+      width: 26px;
+      height: 26px;
+      color: var(--green-dark)
+    }
+
+    .step h3 {
+      font-size: 1.32rem;
+      color: var(--navy);
+      margin-bottom: 10px
+    }
+
+    .step p {
+      color: var(--muted);
+      font-size: 1rem
+    }
+
+    .step .bar {
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 4px;
+      width: 100%;
+      background: linear-gradient(90deg, var(--green), #00D97A)
+    }
+
+    /* ---------- Para quem é ---------- */
+    .pains {
+      background: var(--navy);
+      color: #fff
+    }
+
+    .pains:before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(700px 360px at 85% 0, rgba(0, 193, 110, .16), transparent 60%);
+      pointer-events: none
+    }
+
+    .pains .sec-head h2 {
+      color: #fff
+    }
+
+    .pains .kicker {
+      color: var(--amber)
+    }
+
+    .pain-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+      position: relative
+    }
+
+    .pain {
+      background: #fff;
+      color: var(--navy);
+      border-radius: var(--radius-lg);
+      padding: 34px 30px;
+      box-shadow: 0 30px 60px -30px rgba(0, 0, 0, .5);
+      position: relative;
+    }
+
+    .pain .quote {
+      font-family: var(--head);
+      font-size: 4rem;
+      line-height: .6;
+      color: var(--green-soft);
+      height: 34px;
+      display: block
+    }
+
+    .pain p {
+      font-size: 1.18rem;
+      font-weight: 600;
+      font-family: var(--head);
+      color: var(--navy);
+      letter-spacing: -.01em
+    }
+
+    .pains .closer {
+      text-align: center;
+      margin-top: 46px;
+      font-size: 1.3rem;
+      font-family: var(--head);
+      font-weight: 700;
+      color: #fff
+    }
+
+    .pains .closer span {
+      color: var(--green)
+    }
+
+    /* ---------- Depoimentos ---------- */
+    .testi-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px
+    }
+
+    .testi {
+      background: #fff;
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-lg);
+      padding: 30px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .testi .stars {
+      font-size: 1rem
+    }
+
+    .testi .result {
+      font-family: var(--head);
+      font-weight: 800;
+      font-size: 1.32rem;
+      color: var(--navy);
+      letter-spacing: -.02em;
+      line-height: 1.2
+    }
+
+    .testi .body {
+      color: var(--muted);
+      font-size: .98rem;
+      flex: 1
+    }
+
+    .testi .who {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-top: 1px solid var(--gray-200);
+      padding-top: 16px
+    }
+
+    .testi .who .ava {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      font-weight: 700;
+      font-family: var(--head);
+      flex: none
+    }
+
+    .testi .who b {
+      display: block;
+      font-family: var(--head);
+      font-size: .98rem;
+      color: var(--navy)
+    }
+
+    .testi .who small {
+      color: var(--muted-light);
+      font-size: .84rem
+    }
+
+    /* ---------- Preços ---------- */
+    .pricing-sec {
+      background: var(--gray-100)
+    }
+
+    .plans {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      max-width: 840px;
+      margin: 0 auto;
+      align-items: stretch
+    }
+
+    .plan {
+      background: #fff;
+      border-radius: var(--radius-lg);
+      padding: 40px 36px;
+      border: 1px solid var(--gray-200);
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .plan.pro {
+      border: 2px solid var(--green);
+      box-shadow: var(--shadow);
+      transform: translateY(-6px)
+    }
+
+    .plan .tag {
+      font-family: var(--head);
+      font-weight: 700;
+      color: var(--navy);
+      font-size: 1.18rem
+    }
+
+    .plan .desc {
+      color: var(--muted);
+      font-size: .95rem;
+      margin-top: 4px;
+      margin-bottom: 22px
+    }
+
+    .plan .price {
+      font-family: var(--head);
+      font-weight: 800;
+      color: var(--navy);
+      font-size: 2.8rem;
+      letter-spacing: -.03em;
+      line-height: 1
+    }
+
+    .plan .price small {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--muted);
+      letter-spacing: 0
+    }
+
+    .plan ul {
+      list-style: none;
+      margin: 26px 0 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 13px
+    }
+
+    .plan li {
+      display: flex;
+      align-items: flex-start;
+      gap: 11px;
+      color: var(--ink);
+      font-size: .98rem
+    }
+
+    .plan li svg {
+      width: 20px;
+      height: 20px;
+      color: var(--green);
+      flex: none;
+      margin-top: 2px
+    }
+
+    .plan .btn {
+      width: 100%;
+      margin-top: auto
+    }
+
+    .badge-pro {
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--amber);
+      color: var(--navy);
+      font-family: var(--head);
+      font-weight: 800;
+      font-size: .8rem;
+      padding: 7px 16px;
+      border-radius: 999px;
+      box-shadow: 0 8px 18px -6px rgba(255, 193, 7, .6);
+      white-space: nowrap;
+    }
+
+    .pricing-note {
+      text-align: center;
+      color: var(--muted);
+      margin-top: 30px;
+      font-weight: 600
+    }
+
+    .pricing-note svg {
+      width: 17px;
+      height: 17px;
+      color: var(--green);
+      vertical-align: -3px;
+      margin-right: 5px
+    }
+
+    /* ---------- FAQ ---------- */
+    .faq-list {
+      max-width: 760px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 14px
+    }
+
+    .faq-item {
+      background: #fff;
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: box-shadow .2s, border-color .2s
+    }
+
+    .faq-item.open {
+      box-shadow: var(--shadow);
+      border-color: transparent
+    }
+
+    .faq-q {
+      width: 100%;
+      text-align: left;
+      background: none;
+      border: 0;
+      cursor: pointer;
+      padding: 22px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      font-family: var(--head);
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--navy);
+    }
+
+    .faq-q .chev {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--green-soft);
+      display: grid;
+      place-items: center;
+      flex: none;
+      transition: transform .25s, background .2s
+    }
+
+    .faq-q .chev svg {
+      width: 17px;
+      height: 17px;
+      color: var(--green-dark)
+    }
+
+    .faq-item.open .chev {
+      transform: rotate(180deg);
+      background: var(--green);
+    }
+
+    .faq-item.open .chev svg {
+      color: #fff
+    }
+
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .3s ease
+    }
+
+    .faq-a p {
+      padding: 0 24px 22px;
+      color: var(--muted);
+      font-size: 1.02rem
+    }
+
+    /* ---------- CTA final ---------- */
+    .cta-final {
+      background: linear-gradient(150deg, var(--green), #00A75F);
+      color: #fff;
+      text-align: center;
+      overflow: hidden
+    }
+
+    .cta-final:before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(600px 300px at 20% 120%, rgba(255, 255, 255, .18), transparent 60%)
+    }
+
+    .cta-final .wrap {
+      position: relative;
+      padding: 84px 24px
+    }
+
+    .cta-final h2 {
+      font-size: clamp(2.1rem, 4vw, 3rem);
+      color: #fff;
+      max-width: 680px;
+      margin: 0 auto 14px
+    }
+
+    .cta-final p {
+      font-size: 1.15rem;
+      opacity: .95;
+      margin-bottom: 34px
+    }
+
+    .cta-final .btn-white {
+      font-size: 1.18rem;
+      padding: 19px 40px
+    }
+
+    /* ---------- Footer ---------- */
+    footer {
+      background: var(--navy);
+      color: #9fb0c0;
+      padding: 60px 0 34px
+    }
+
+    .foot-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 30px;
+      flex-wrap: wrap;
+      padding-bottom: 34px;
+      border-bottom: 1px solid rgba(255, 255, 255, .1)
+    }
+
+    .foot-top .lead {
+      max-width: 320px
+    }
+
+    .foot-top .lead p {
+      margin-top: 14px;
+      font-size: .95rem;
+      color: #7e90a2
+    }
+
+    .foot-cols {
+      display: flex;
+      gap: 60px;
+      flex-wrap: wrap
+    }
+
+    .foot-col h5 {
+      font-family: var(--head);
+      color: #fff;
+      font-size: .95rem;
+      margin-bottom: 14px
+    }
+
+    .foot-col a {
+      display: block;
+      color: #9fb0c0;
+      font-size: .92rem;
+      padding: 5px 0;
+      transition: color .15s
+    }
+
+    .foot-col a:hover {
+      color: var(--green)
+    }
+
+    .foot-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      padding-top: 26px;
+      font-size: .88rem;
+      color: #7e90a2
+    }
+
+    .socials {
+      display: flex;
+      gap: 10px
+    }
+
+    .socials a {
+      width: 40px;
+      height: 40px;
+      border-radius: 11px;
+      background: rgba(255, 255, 255, .07);
+      display: grid;
+      place-items: center;
+      transition: background .15s, transform .15s
+    }
+
+    .socials a:hover {
+      background: var(--green);
+      transform: translateY(-2px)
+    }
+
+    .socials a svg {
+      width: 19px;
+      height: 19px;
+      color: #fff
+    }
+
+    /* ---------- Scroll reveal ---------- */
+    .js-reveal .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .7s cubic-bezier(.22, .61, .36, 1), transform .7s cubic-bezier(.22, .61, .36, 1)
+    }
+
+    .js-reveal .reveal.visible {
+      opacity: 1;
+      transform: none
+    }
+
+    .reveal.d1 {
+      transition-delay: .08s
+    }
+
+    .reveal.d2 {
+      transition-delay: .16s
+    }
+
+    .reveal.d3 {
+      transition-delay: .24s
+    }
+
+    /* ---------- Mobile menu ---------- */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 74px 0 auto 0;
+      z-index: 55;
+      background: #fff;
+      border-bottom: 1px solid var(--gray-200);
+      box-shadow: var(--shadow);
+      padding: 18px 24px 26px
+    }
+
+    .mobile-menu.show {
+      display: block
+    }
+
+    .mobile-menu a.link {
+      display: block;
+      padding: 13px 0;
+      font-weight: 600;
+      color: var(--navy);
+      font-family: var(--head);
+      border-bottom: 1px solid var(--gray-100)
+    }
+
+    .mobile-menu .btn {
+      width: 100%;
+      margin-top: 18px
+    }
+
+    /* ---------- Responsive ---------- */
+    @media(max-width:980px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 54px
+      }
+
+      .phone-stage {
+        order: -1
+      }
+
+      .hero p.sub {
+        margin-left: auto;
+        margin-right: auto
+      }
+
+      .hero {
+        text-align: center;
+        padding: 48px 0 70px
+      }
+
+      .eyebrow {
+        margin: 0 auto
+      }
+
+      .hero-ctas,
+      .social-proof {
+        justify-content: center
+      }
+
+      .steps,
+      .pain-grid,
+      .testi-grid {
+        grid-template-columns: 1fr
+      }
+
+      .sec {
+        padding: 72px 0
+      }
+    }
+
+    @media(max-width:720px) {
+
+      .nav-links,
+      .nav-cta .btn {
+        display: none
+      }
+
+      .nav-toggle {
+        display: block
+      }
+
+      .plans {
+        grid-template-columns: 1fr;
+        max-width: 440px
+      }
+
+      .plan.pro {
+        transform: none
+      }
+
+      .float-chip {
+        display: none
+      }
+
+      .foot-top {
+        flex-direction: column
+      }
+    }
+
+    @media(max-width:420px) {
+      .wrap {
+        padding: 0 18px
+      }
+
+      .phone {
+        width: 270px;
+        height: 560px
+      }
+    }
+
+    /* ---------- Promo bar ---------- */
+    .promo-bar {
+      position: sticky;
+      top: 0;
+      z-index: 65;
+      background: linear-gradient(90deg, #0A1628 0%, #0d2240 50%, #0A1628 100%);
+      color: #fff;
+      padding: 0 20px;
+      height: 46px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      overflow: hidden;
+    }
+
+    .promo-bar:before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(600px 80px at 50% 50%, rgba(0, 193, 110, .18), transparent 70%);
+      pointer-events: none;
+    }
+
+    .promo-fire {
+      font-size: 1.05rem;
+      flex: none;
+      animation: shake 2.4s ease-in-out infinite
+    }
+
+    @keyframes shake {
+
+      0%,
+      100% {
+        transform: rotate(-8deg)
+      }
+
+      50% {
+        transform: rotate(8deg)
+      }
+    }
+
+    .promo-text {
+      font-size: .88rem;
+      font-family: var(--head);
+      font-weight: 600;
+      text-align: center
+    }
+
+    .promo-text strong {
+      color: var(--amber)
+    }
+
+    .promo-spots {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 193, 7, .18);
+      border: 1px solid rgba(255, 193, 7, .4);
+      border-radius: 999px;
+      padding: 3px 11px;
+      font-size: .78rem;
+      font-weight: 700;
+      font-family: var(--head);
+      color: var(--amber);
+      white-space: nowrap;
+      flex: none;
+    }
+
+    .spot-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--amber);
+      animation: pulse 1.4s infinite
+    }
+
+    .promo-cta {
+      flex: none;
+      background: var(--green);
+      color: #fff;
+      border: 0;
+      cursor: pointer;
+      font-family: var(--head);
+      font-weight: 700;
+      font-size: .82rem;
+      padding: 7px 16px;
+      border-radius: 999px;
+      white-space: nowrap;
+      transition: background .15s, transform .15s;
+      box-shadow: 0 4px 12px -4px rgba(0, 193, 110, .5);
+    }
+
+    .promo-cta:hover {
+      background: var(--green-dark);
+      transform: translateY(-1px)
+    }
+
+    .promo-close {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: 0;
+      cursor: pointer;
+      color: rgba(255, 255, 255, .5);
+      font-size: 1.3rem;
+      line-height: 1;
+      padding: 4px 6px;
+      transition: color .15s;
+    }
+
+    .promo-close:hover {
+      color: #fff
+    }
+
+    header.nav {
+      top: 46px
+    }
+
+    header.nav.promo-gone {
+      top: 0
+    }
+
+    @media(max-width:720px) {
+      .promo-text .hide-mob {
+        display: none
+      }
+
+      .promo-bar {
+        gap: 8px;
+        padding: 0 36px 0 12px
+      }
+
+      header.nav {
+        top: 46px
+      }
+    }
+
+    @media(max-width:420px) {
+      .promo-spots {
+        display: none
+      }
+    }
+
+    /* ---------- Modal ---------- */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: rgba(10, 22, 40, .68);
+      backdrop-filter: blur(6px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .25s ease;
+    }
+
+    .modal-overlay.show {
+      opacity: 1;
+      pointer-events: all
+    }
+
+    .modal-box {
+      background: #fff;
+      border-radius: var(--radius-lg);
+      width: 100%;
+      max-width: 520px;
+      max-height: 92vh;
+      overflow-y: auto;
+      padding: 38px 36px;
+      position: relative;
+      box-shadow: 0 48px 96px -24px rgba(10, 22, 40, .5);
+      transform: translateY(30px) scale(.97);
+      transition: transform .32s cubic-bezier(.22, .61, .36, 1);
+      scrollbar-width: thin;
+    }
+
+    .modal-overlay.show .modal-box {
+      transform: none
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 0;
+      background: var(--gray-100);
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      transition: background .15s;
+    }
+
+    .modal-close:hover {
+      background: var(--gray-200)
+    }
+
+    .modal-close svg {
+      width: 18px;
+      height: 18px;
+      color: var(--muted)
+    }
+
+    .modal-hd {
+      text-align: center;
+      margin-bottom: 26px
+    }
+
+    .modal-hd .logo {
+      justify-content: center;
+      margin-bottom: 14px
+    }
+
+    .modal-hd h2 {
+      font-family: var(--head);
+      font-size: 1.52rem;
+      color: var(--navy);
+      margin: 0 0 8px;
+      font-weight: 800;
+      line-height: 1.2;
+      letter-spacing: -.02em
+    }
+
+    .modal-hd h2 .hl {
+      color: var(--green)
+    }
+
+    .modal-hd p {
+      color: var(--muted);
+      font-size: .93rem
+    }
+
+    .form-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 14px
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 5px
+    }
+
+    .field label {
+      font-family: var(--head);
+      font-weight: 700;
+      font-size: .84rem;
+      color: var(--navy)
+    }
+
+    .field label .opt {
+      font-weight: 500;
+      color: var(--muted-light);
+      font-size: .77rem
+    }
+
+    .field input,
+    .field select {
+      height: 46px;
+      border-radius: 11px;
+      border: 1.5px solid var(--gray-200);
+      padding: 0 13px;
+      font-family: var(--body);
+      font-size: .94rem;
+      color: var(--ink);
+      outline: none;
+      background: #fff;
+      transition: border-color .15s, box-shadow .15s;
+    }
+
+    .field select {
+      appearance: none;
+      -webkit-appearance: none;
+      cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235B6B7B' stroke-width='2.2' stroke-linecap='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 11px center;
+      background-size: 17px;
+      padding-right: 34px;
+    }
+
+    .field input:focus,
+    .field select:focus {
+      border-color: var(--green);
+      box-shadow: 0 0 0 3px rgba(0, 193, 110, .14)
+    }
+
+    .field input.err,
+    .field select.err {
+      border-color: #e53e3e;
+      box-shadow: 0 0 0 3px rgba(229, 62, 62, .1)
+    }
+
+    .form-note {
+      text-align: center;
+      font-size: .79rem;
+      color: var(--muted-light);
+      margin-top: 2px
+    }
+
+    .form-success {
+      display: none;
+      text-align: center;
+      padding: 14px 0 6px
+    }
+
+    .form-success.show {
+      display: block
+    }
+
+    .suc-ic {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background: var(--green-soft);
+      display: grid;
+      place-items: center;
+      margin: 0 auto 18px
+    }
+
+    .suc-ic svg {
+      width: 34px;
+      height: 34px;
+      color: var(--green)
+    }
+
+    .form-success h3 {
+      font-family: var(--head);
+      font-size: 1.4rem;
+      color: var(--navy);
+      margin-bottom: 8px;
+      font-weight: 800
+    }
+
+    .form-success p {
+      color: var(--muted);
+      font-size: .95rem;
+      line-height: 1.55
+    }
+
+    @media(max-width:520px) {
+      .modal-box {
+        padding: 26px 18px
+      }
+
+      .form-row {
+        grid-template-columns: 1fr
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-<!-- ============ PROMO BAR ============ -->
-<div class="promo-bar" id="promoBar">
-  <span class="promo-fire">🔥</span>
-  <span class="promo-text">
-    <strong>Promoção relâmpago:</strong> Primeiros <strong>10 corretores</strong><span class="hide-mob"> que se inscreverem têm</span> <strong style="color:var(--green)">3 meses GRÁTIS</strong>
-  </span>
-  <span class="promo-spots"><span class="spot-dot"></span><span id="spotsLeft">7</span> vagas restantes</span>
-  <button class="promo-cta" onclick="openModal('Promo Bar')">Quero minha vaga →</button>
-  <button class="promo-close" onclick="closePromo()" aria-label="Fechar">×</button>
-</div>
-
-<!-- ============ NAVBAR ============ -->
-<header class="nav" id="nav">
-  <div class="wrap nav-inner">
-    <a href="#top" class="logo" aria-label="Leadz">
-      <span class="mark">
-        <svg viewBox="0 0 24 24" fill="none"><path d="M13 2L4.5 13.5h6L9 22l9.5-12.5h-6L13 2z" fill="#fff"/></svg>
-      </span>
-      <span class="word">Lead<span style="position:relative">z<span class="dot"></span></span></span>
-    </a>
-    <nav class="nav-links">
-      <a href="#como-funciona" class="link">Como funciona</a>
-      <a href="#para-quem" class="link">Pra quem é</a>
-      <a href="#precos" class="link">Preços</a>
-    </nav>
-    <div class="nav-cta">
-      <button class="btn btn-green" onclick="openModal('Navbar')">Quero receber leads</button>
-      <button class="nav-toggle" id="navToggle" aria-label="Menu">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
-      </button>
-    </div>
+  <!-- ============ PROMO BAR ============ -->
+  <div class="promo-bar" id="promoBar">
+    <span class="promo-fire">🔥</span>
+    <span class="promo-text">
+      <strong>Promoção relâmpago:</strong> Primeiros <strong>10 corretores</strong><span class="hide-mob"> que se
+        inscreverem têm</span> <strong style="color:var(--green)">3 meses GRÁTIS</strong>
+    </span>
+    <span class="promo-spots"><span class="spot-dot"></span><span id="spotsLeft">7</span> vagas restantes</span>
+    <button class="promo-cta" onclick="openModal('Promo Bar')">Quero minha vaga →</button>
+    <button class="promo-close" onclick="closePromo()" aria-label="Fechar">×</button>
   </div>
-</header>
-<div class="mobile-menu" id="mobileMenu">
-  <a href="#como-funciona" class="link">Como funciona</a>
-  <a href="#para-quem" class="link">Pra quem é</a>
-  <a href="#precos" class="link">Preços</a>
-  <button class="btn btn-green" onclick="openModal('Menu Mobile')">Quero receber leads</button>
-</div>
 
-<span id="top"></span>
-
-<!-- ============ MODAL FORMULÁRIO ============ -->
-<div class="modal-overlay" id="modalOverlay" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-  <div class="modal-box">
-    <button class="modal-close" id="modalClose" aria-label="Fechar">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
-    </button>
-    <div class="modal-hd">
-      <span class="logo"><span class="mark"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2L4.5 13.5h6L9 22l9.5-12.5h-6L13 2z" fill="#fff"/></svg></span><span class="word">Lead<span style="position:relative">z<span class="dot"></span></span></span></span>
-      <h2 id="modalTitle">Receba leads <span class="hl">pré-qualificados</span></h2>
-      <p id="modalSub">Preencha abaixo e nossa equipe entra em contato em até 24h.</p>
+  <!-- ============ NAVBAR ============ -->
+  <header class="nav" id="nav">
+    <div class="wrap nav-inner">
+      <a href="#top" class="logo" aria-label="Leadz">
+        <span class="mark">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M13 2L4.5 13.5h6L9 22l9.5-12.5h-6L13 2z" fill="#fff" />
+          </svg>
+        </span>
+        <span class="word">Lead<span style="position:relative">z<span class="dot"></span></span></span>
+      </a>
+      <nav class="nav-links">
+        <a href="#como-funciona" class="link">Como funciona</a>
+        <a href="#para-quem" class="link">Pra quem é</a>
+        <a href="#precos" class="link">Preços</a>
+      </nav>
+      <div class="nav-cta">
+        <button class="btn btn-green" onclick="openModal('Navbar')">Quero receber leads</button>
+        <button class="nav-toggle" id="navToggle" aria-label="Menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+            <path d="M4 7h16M4 12h16M4 17h16" />
+          </svg>
+        </button>
+      </div>
     </div>
-    <form class="form-grid" id="leadForm" novalidate>
-      <input type="hidden" name="origem" id="formOrigem">
-      <div class="form-row">
-        <div class="field">
-          <label>Nome completo</label>
-          <input type="text" name="nome" placeholder="João Silva" required>
-        </div>
-        <div class="field">
-          <label>WhatsApp</label>
-          <input type="tel" name="whatsapp" placeholder="(11) 99999-9999" required>
-        </div>
-      </div>
-      <div class="field">
-        <label>E-mail profissional</label>
-        <input type="email" name="email" placeholder="joao@imobiliaria.com.br" required>
-      </div>
-      <div class="form-row">
-        <div class="field">
-          <label>CRECI <span class="opt">(opcional)</span></label>
-          <input type="text" name="creci" placeholder="123456-F">
-        </div>
-        <div class="field">
-          <label>Cidade de atuação</label>
-          <input type="text" name="cidade" placeholder="São Paulo - SP" required>
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="field">
-          <label>Leads por mês</label>
-          <select name="leads_mes" required>
-            <option value="">Selecione...</option>
-            <option>10 a 20 leads/mês</option>
-            <option>20 a 50 leads/mês</option>
-            <option>50 a 100 leads/mês</option>
-            <option>Mais de 100 leads/mês</option>
-          </select>
-        </div>
-        <div class="field">
-          <label>Foco de atuação</label>
-          <select name="foco" required>
-            <option value="">Selecione...</option>
-            <option>Residencial</option>
-            <option>Comercial</option>
-            <option>Ambos</option>
-          </select>
-        </div>
-      </div>
-      <button type="submit" class="btn btn-green btn-lg" style="width:100%;margin-top:4px">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" width="19" height="19"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-        Quero receber leads qualificados
-      </button>
-      <p class="form-note">Sem taxa de adesão · Retorno em até 24h</p>
-    </form>
-    <div class="form-success" id="formSuccess">
-      <div class="suc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
-      <h3>Cadastro recebido!</h3>
-      <p>Nossa equipe vai entrar em contato pelo WhatsApp em até 24h.<br>Bem-vindo, <strong id="successName"></strong>!</p>
-      <button class="btn btn-green" style="margin-top:22px" onclick="closeModal()">Fechar</button>
-    </div>
+  </header>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#como-funciona" class="link">Como funciona</a>
+    <a href="#para-quem" class="link">Pra quem é</a>
+    <a href="#precos" class="link">Preços</a>
+    <button class="btn btn-green" onclick="openModal('Menu Mobile')">Quero receber leads</button>
   </div>
-</div>
 
-<!-- ============ HERO ============ -->
-<section class="hero">
-  <div class="wrap hero-grid">
-    <div class="hero-copy">
-      <span class="eyebrow reveal"><span class="pulse"></span> +12.000 conexões realizadas em 2026</span>
-      <h1 class="reveal d1">Leads imobiliários que já sabem o que querem <span class="hl">— e quanto podem pagar.</span></h1>
-      <p class="sub reveal d2">A Lara, nossa IA, conversa com o comprador, valida o perfil de busca e o limite de crédito — e entrega o lead pronto no seu WhatsApp. Você só fecha.</p>
-      <div class="hero-ctas reveal d3">
-        <button class="btn btn-green btn-lg" onclick="openModal('Hero')">Quero receber leads</button>
-        <a href="#como-funciona" class="link-down">Ver como funciona
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
-        </a>
-      </div>
-      <div class="social-proof reveal d3">
-        <div class="avatars">
-          <span style="background:#0A1628">MT</span>
-          <span style="background:#00A75F">LP</span>
-          <span style="background:#F0B000">RL</span>
-          <span style="background:#13233C">CA</span>
-        </div>
-        <div class="txt">
-          <span class="stars">★★★★★</span><br>
-          <strong>Corretores e imobiliárias</strong> que pararam de perder tempo com curioso
-        </div>
-      </div>
-    </div>
+  <span id="top"></span>
 
-    <!-- Phone mockup -->
-    <div class="phone-stage reveal d2">
-      <div class="float-chip chip-1">
-        <span class="ic" style="background:var(--green-soft)">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#00A75F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-        </span>
-        <div><b>Lead qualificado!</b><small>perfil + crédito</small></div>
+  <!-- ============ MODAL FORMULÁRIO ============ -->
+  <div class="modal-overlay" id="modalOverlay" aria-hidden="true" role="dialog" aria-modal="true"
+    aria-labelledby="modalTitle">
+    <div class="modal-box">
+      <button class="modal-close" id="modalClose" aria-label="Fechar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round">
+          <path d="M18 6L6 18M6 6l12 12" />
+        </svg>
+      </button>
+      <div class="modal-hd">
+        <span class="logo"><span class="mark"><svg viewBox="0 0 24 24" fill="none">
+              <path d="M13 2L4.5 13.5h6L9 22l9.5-12.5h-6L13 2z" fill="#fff" />
+            </svg></span><span class="word">Lead<span style="position:relative">z<span
+                class="dot"></span></span></span></span>
+        <h2 id="modalTitle">Receba leads <span class="hl">pré-qualificados</span></h2>
+        <p id="modalSub">Preencha abaixo e nossa equipe entra em contato em até 24h.</p>
       </div>
-      <div class="float-chip chip-2">
-        <span class="ic" style="background:rgba(255,193,7,.18)">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#F0B000" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
-        </span>
-        <div><b>Crédito aprovado</b><small>até R$ 650 mil</small></div>
-      </div>
-
-      <div class="phone">
-        <div class="screen">
-          <div class="wa-top">
-            <span class="notch"></span>
-            <span class="ava"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 2H4a2 2 0 0 0-2 2v18l4-4h14a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2z"/></svg></span>
-            <div class="who"><b>Leadz Imóveis</b><small>lead qualificado</small></div>
+      <form class="form-grid" id="leadForm" novalidate>
+        <input type="hidden" name="origem" id="formOrigem">
+        <div class="form-row">
+          <div class="field">
+            <label>Nome completo</label>
+            <input type="text" name="nome" placeholder="João Silva" required>
           </div>
-          <div class="wa-body" id="waBody">
-            <div class="lead-card" style="animation-delay:.1s">
-              <div class="name">Mariana Costa <span class="new">PRÉ-QUALIFICADO</span></div>
-              <div class="lead-prof">
-                <div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7M5 10v10h14V10"/></svg>Busca: <b>Apê 2 quartos, com varanda</b></div>
-                <div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 6-9 12-9 12S3 16 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Região: <b>Zona Sul, São Paulo</b></div>
-                <div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Urgência: <b>quer fechar em 30 dias</b></div>
+          <div class="field">
+            <label>WhatsApp</label>
+            <input type="tel" name="whatsapp" placeholder="(11) 99999-9999" required>
+          </div>
+        </div>
+        <div class="field">
+          <label>E-mail profissional</label>
+          <input type="email" name="email" placeholder="joao@imobiliaria.com.br" required>
+        </div>
+        <div class="form-row">
+          <div class="field">
+            <label>CRECI <span class="opt">(opcional)</span></label>
+            <input type="text" name="creci" placeholder="123456-F">
+          </div>
+          <div class="field">
+            <label>Cidade de atuação</label>
+            <input type="text" name="cidade" placeholder="São Paulo - SP" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="field">
+            <label>Leads por mês</label>
+            <select name="leads_mes" required>
+              <option value="">Selecione...</option>
+              <option>10 a 20 leads/mês</option>
+              <option>20 a 50 leads/mês</option>
+              <option>50 a 100 leads/mês</option>
+              <option>Mais de 100 leads/mês</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Foco de atuação</label>
+            <select name="foco" required>
+              <option value="">Selecione...</option>
+              <option>Residencial</option>
+              <option>Comercial</option>
+              <option>Ambos</option>
+            </select>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-green btn-lg" style="width:100%;margin-top:4px">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+            stroke-linejoin="round" width="19" height="19">
+            <path
+              d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z" />
+          </svg>
+          Quero receber leads qualificados
+        </button>
+        <p class="form-note">Sem taxa de adesão · Retorno em até 24h</p>
+      </form>
+      <div class="form-success" id="formSuccess">
+        <div class="suc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 6L9 17l-5-5" />
+          </svg></div>
+        <h3>Cadastro recebido!</h3>
+        <p>Nossa equipe vai entrar em contato pelo WhatsApp em até 24h.<br>Bem-vindo, <strong
+            id="successName"></strong>!</p>
+        <button class="btn btn-green" style="margin-top:22px" onclick="closeModal()">Fechar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <span class="eyebrow reveal"><span class="pulse"></span> +12.000 conexões realizadas em 2026</span>
+        <h1 class="reveal d1">Leads imobiliários que já sabem o que querem <span class="hl">— e quanto podem
+            pagar.</span></h1>
+        <p class="sub reveal d2">A Lara, nossa IA, conversa com o comprador, valida o perfil de busca e o limite de
+          crédito — e entrega o lead pronto no seu WhatsApp. Você só fecha.</p>
+        <div class="hero-ctas reveal d3">
+          <button class="btn btn-green btn-lg" onclick="openModal('Hero')">Quero receber leads</button>
+          <a href="#como-funciona" class="link-down">Ver como funciona
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 5v14M5 12l7 7 7-7" />
+            </svg>
+          </a>
+        </div>
+        <div class="social-proof reveal d3">
+          <div class="avatars">
+            <span style="background:#0A1628">MT</span>
+            <span style="background:#00A75F">LP</span>
+            <span style="background:#F0B000">RL</span>
+            <span style="background:#13233C">CA</span>
+          </div>
+          <div class="txt">
+            <span class="stars">★★★★★</span><br>
+            <strong>Corretores e imobiliárias</strong> que pararam de perder tempo com curioso
+          </div>
+        </div>
+      </div>
+
+      <!-- Phone mockup -->
+      <div class="phone-stage reveal d2">
+        <div class="float-chip chip-1">
+          <span class="ic" style="background:var(--green-soft)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#00A75F" stroke-width="2.2" stroke-linecap="round"
+              stroke-linejoin="round" width="18" height="18">
+              <path
+                d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z" />
+            </svg>
+          </span>
+          <div><b>Lead qualificado!</b><small>perfil + crédito</small></div>
+        </div>
+        <div class="float-chip chip-2">
+          <span class="ic" style="background:rgba(255,193,7,.18)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#F0B000" stroke-width="2.2" stroke-linecap="round"
+              stroke-linejoin="round" width="18" height="18">
+              <rect x="2" y="5" width="20" height="14" rx="2" />
+              <path d="M2 10h20" />
+            </svg>
+          </span>
+          <div><b>Crédito aprovado</b><small>até R$ 650 mil</small></div>
+        </div>
+
+        <div class="phone">
+          <div class="screen">
+            <div class="wa-top">
+              <span class="notch"></span>
+              <span class="ava"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 2H4a2 2 0 0 0-2 2v18l4-4h14a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2z" />
+                </svg></span>
+              <div class="who"><b>Leadz Imóveis</b><small>lead qualificado</small></div>
+            </div>
+            <div class="wa-body" id="waBody">
+              <div class="lead-card" style="animation-delay:.1s">
+                <div class="name">Mariana Costa <span class="new">PRÉ-QUALIFICADO</span></div>
+                <div class="lead-prof">
+                  <div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                      stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M3 11l9-7 9 7M5 10v10h14V10" />
+                    </svg>Busca: <b>Apê 2 quartos, com varanda</b></div>
+                  <div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                      stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M21 10c0 6-9 12-9 12S3 16 3 10a9 9 0 0 1 18 0z" />
+                      <circle cx="12" cy="10" r="3" />
+                    </svg>Região: <b>Zona Sul, São Paulo</b></div>
+                  <div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                      stroke-linecap="round" stroke-linejoin="round">
+                      <circle cx="12" cy="12" r="9" />
+                      <path d="M12 7v5l3 2" />
+                    </svg>Urgência: <b>quer fechar em 30 dias</b></div>
+                </div>
+                <div class="lead-credit">
+                  <span class="cic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                      stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="2" y="5" width="20" height="14" rx="2" />
+                      <path d="M2 10h20" />
+                    </svg></span>
+                  <div>
+                    <div class="v">Crédito aprovado: até R$ 650 mil</div><small>validado antes de chegar pra
+                      você</small>
+                  </div>
+                </div>
+                <div class="time">agora · exclusivo seu</div>
               </div>
-              <div class="lead-credit">
-                <span class="cic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg></span>
-                <div><div class="v">Crédito aprovado: até R$ 650 mil</div><small>validado antes de chegar pra você</small></div>
-              </div>
-              <div class="time">agora · exclusivo seu</div>
+            </div>
+            <div class="wa-input">
+              <span class="pill">Falar com o lead…</span>
+              <span class="send"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" />
+                </svg></span>
             </div>
           </div>
-          <div class="wa-input">
-            <span class="pill">Falar com o lead…</span>
-            <span class="send"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============ COMO FUNCIONA ============ -->
+  <section class="sec steps-sec" id="como-funciona">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="kicker">Como funciona</div>
+        <h2>Simples assim. Em 3 passos.</h2>
+        <p>Você cuida do seu serviço. A gente cuida de trazer os clientes.</p>
+      </div>
+      <div class="steps">
+        <div class="step reveal d1">
+          <span class="bar"></span>
+          <div class="num">01</div>
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+              <circle cx="9" cy="7" r="4" />
+              <path d="M19 8v6M22 11h-6" />
+            </svg></div>
+          <h3>Você se cadastra em 5 minutos</h3>
+          <p>Sem burocracia. Conta o que você faz e onde atende — o resto é com a gente.</p>
+        </div>
+        <div class="step reveal d2">
+          <span class="bar"></span>
+          <div class="num">02</div>
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path
+                d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8" />
+              <circle cx="12" cy="12" r="3" />
+            </svg></div>
+          <h3>A Leadz cria e gerencia seus anúncios</h3>
+          <p>Nossa equipe monta, publica e otimiza tudo no Google e nas redes. Você não toca em nada.</p>
+        </div>
+        <div class="step reveal d3">
+          <span class="bar"></span>
+          <div class="num">03</div>
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path
+                d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
+            </svg></div>
+          <h3>Clientes chegam direto no seu WhatsApp</h3>
+          <p>Você recebe contatos de gente realmente interessada e fecha negócio do seu jeito.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PARA QUEM É ============ -->
+  <section class="sec pains" id="para-quem">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="kicker">Quem é pra você</div>
+        <h2>Você já passou por isso?</h2>
+      </div>
+      <div class="pain-grid">
+        <div class="pain reveal d1">
+          <span class="quote">“</span>
+          <p>Não tenho tempo pra aprender a anunciar.</p>
+        </div>
+        <div class="pain reveal d2">
+          <span class="quote">“</span>
+          <p>Já tentei anúncio e joguei dinheiro fora.</p>
+        </div>
+        <div class="pain reveal d3">
+          <span class="quote">“</span>
+          <p>Não quero pagar caro pra uma agência.</p>
+        </div>
+      </div>
+      <p class="closer reveal">Se você se identificou com alguma dessas, a <span>Leadz</span> foi feita pra você.</p>
+    </div>
+  </section>
+
+  <!-- ============ DEPOIMENTOS ============ -->
+  <section class="sec">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="kicker">Histórias reais</div>
+        <h2>Quem usa, cresce.</h2>
+        <p>Profissionais como você que cansaram de esperar o telefone tocar.</p>
+      </div>
+      <div class="testi-grid">
+        <div class="testi reveal d1">
+          <span class="stars">★★★★★</span>
+          <div class="result">"Triplicou meus pedidos em 30 dias."</div>
+          <p class="body">Eu não acreditava que ia dar certo. Hoje meu WhatsApp não para. Tive que contratar um
+            ajudante.</p>
+          <div class="who">
+            <span class="ava" style="background:#0A1628">JS</span>
+            <div><b>João Silva</b><small>Eletricista · Curitiba</small></div>
+          </div>
+        </div>
+        <div class="testi reveal d2">
+          <span class="stars">★★★★★</span>
+          <div class="result">"Minha agenda fechou o mês inteiro."</div>
+          <p class="body">Antes ficava dependendo de indicação. Agora chega cliente novo todo dia, sem eu precisar fazer
+            nada.</p>
+          <div class="who">
+            <span class="ava" style="background:#00A75F">CA</span>
+            <div><b>Carla Alves</b><small>Estética · São Paulo</small></div>
+          </div>
+        </div>
+        <div class="testi reveal d3">
+          <span class="stars">★★★★★</span>
+          <div class="result">"Investi pouco e o retorno veio rápido."</div>
+          <p class="body">Pela primeira vez senti que o anúncio valeu a pena. Em duas semanas já tinha pago o plano.</p>
+          <div class="who">
+            <span class="ava" style="background:#F0B000">RM</span>
+            <div><b>Rafael Moura</b><small>Encanador · Belo Horizonte</small></div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ============ NICHES ============ -->
-<section class="niches">
-  <div class="wrap">
-    <p class="label reveal">Para quem trabalha com serviços e quer crescer de verdade</p>
-    <div class="niche-row reveal d1">
-      <span class="niche"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>Eletricista</span>
-      <span class="niche"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3c0 1.5 1 2.5 1 4H9a7 7 0 1 0 6 0h-1c0-1.5 1-2.5 1-4a3 3 0 0 0-3-3z"/><circle cx="12" cy="16" r="2"/></svg>Estética</span>
-      <span class="niche"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18v3h3l6.3-6.3a4 4 0 0 0 5.4-5.4l-2.1 2.1-2-2 2.1-2.1z"/></svg>Manutenção</span>
-      <span class="niche"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 3H8L4 9v11a1 1 0 0 0 1 1h6v-7h3v7h4a1 1 0 0 0 1-1V5a2 2 0 0 0-2-2z"/></svg>Pintor</span>
-      <span class="niche"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="2"/><path d="M9 9l3-1 3 1 2 4M12 8v6l-2 6M12 14l2 6"/></svg>Personal</span>
-      <span class="niche"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h12v9a3 3 0 0 1-6 0V7M15 10h3a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2"/></svg>Encanador</span>
-    </div>
-  </div>
-</section>
-
-<!-- ============ COMO FUNCIONA ============ -->
-<section class="sec steps-sec" id="como-funciona">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <div class="kicker">Como funciona</div>
-      <h2>Simples assim. Em 3 passos.</h2>
-      <p>Você cuida do seu serviço. A gente cuida de trazer os clientes.</p>
-    </div>
-    <div class="steps">
-      <div class="step reveal d1">
-        <span class="bar"></span>
-        <div class="num">01</div>
-        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg></div>
-        <h3>Você se cadastra em 5 minutos</h3>
-        <p>Sem burocracia. Conta o que você faz e onde atende — o resto é com a gente.</p>
+  <!-- ============ PREÇOS ============ -->
+  <section class="sec pricing-sec" id="precos">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="kicker">Preços</div>
+        <h2>Escolha e comece hoje.</h2>
+        <p>Sem confusão. Sem letras miúdas. Você sabe exatamente o que paga.</p>
       </div>
-      <div class="step reveal d2">
-        <span class="bar"></span>
-        <div class="num">02</div>
-        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/><circle cx="12" cy="12" r="3"/></svg></div>
-        <h3>A Leadz cria e gerencia seus anúncios</h3>
-        <p>Nossa equipe monta, publica e otimiza tudo no Google e nas redes. Você não toca em nada.</p>
-      </div>
-      <div class="step reveal d3">
-        <span class="bar"></span>
-        <div class="num">03</div>
-        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></div>
-        <h3>Clientes chegam direto no seu WhatsApp</h3>
-        <p>Você recebe contatos de gente realmente interessada e fecha negócio do seu jeito.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ PARA QUEM É ============ -->
-<section class="sec pains" id="para-quem">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <div class="kicker">Quem é pra você</div>
-      <h2>Você já passou por isso?</h2>
-    </div>
-    <div class="pain-grid">
-      <div class="pain reveal d1">
-        <span class="quote">“</span>
-        <p>Não tenho tempo pra aprender a anunciar.</p>
-      </div>
-      <div class="pain reveal d2">
-        <span class="quote">“</span>
-        <p>Já tentei anúncio e joguei dinheiro fora.</p>
-      </div>
-      <div class="pain reveal d3">
-        <span class="quote">“</span>
-        <p>Não quero pagar caro pra uma agência.</p>
-      </div>
-    </div>
-    <p class="closer reveal">Se você se identificou com alguma dessas, a <span>Leadz</span> foi feita pra você.</p>
-  </div>
-</section>
-
-<!-- ============ DEPOIMENTOS ============ -->
-<section class="sec">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <div class="kicker">Histórias reais</div>
-      <h2>Quem usa, cresce.</h2>
-      <p>Profissionais como você que cansaram de esperar o telefone tocar.</p>
-    </div>
-    <div class="testi-grid">
-      <div class="testi reveal d1">
-        <span class="stars">★★★★★</span>
-        <div class="result">"Triplicou meus pedidos em 30 dias."</div>
-        <p class="body">Eu não acreditava que ia dar certo. Hoje meu WhatsApp não para. Tive que contratar um ajudante.</p>
-        <div class="who">
-          <span class="ava" style="background:#0A1628">JS</span>
-          <div><b>João Silva</b><small>Eletricista · Curitiba</small></div>
+      <div class="plans">
+        <div class="plan reveal d1" style="border:2px solid var(--amber)">
+          <span class="badge-pro"
+            style="background:var(--green);color:#fff;box-shadow:0 8px 18px -6px rgba(0,193,110,.5)">🎉 3 meses
+            grátis</span>
+          <div class="tag">Starter</div>
+          <div class="desc">Ideal pra quem está começando</div>
+          <div class="price">R$ 297<small>/mês</small></div>
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M20 6L9 17l-5-5" />
+              </svg>Anúncios criados e gerenciados</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M20 6L9 17l-5-5" />
+              </svg>Clientes direto no seu WhatsApp</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M20 6L9 17l-5-5" />
+              </svg>Relatório simples de resultados</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M20 6L9 17l-5-5" />
+              </svg>Suporte pelo WhatsApp</li>
+          </ul>
+          <button class="btn btn-green" onclick="openModal('Plano Starter')">Começar com o Starter</button>
+        </div>
+        <div class="plan pro reveal d2">
+          <span class="badge-pro">⚡ Mais escolhido</span>
+          <div class="tag">Pro</div>
+          <div class="desc">Mais alcance, mais clientes</div>
+          <div class="price">R$ 497<small>/mês</small></div>
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M20 6L9 17l-5-5" />
+              </svg>Tudo do plano Starter</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M20 6L9 17l-5-5" />
+              </svg>Mais investimento em anúncios</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M20 6L9 17l-5-5" />
+              </svg>Mais alcance na sua região</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M20 6L9 17l-5-5" />
+              </svg>Otimização prioritária da equipe</li>
+          </ul>
+          <button class="btn btn-green" onclick="openModal('Plano Pro')">Quero o plano Pro</button>
         </div>
       </div>
-      <div class="testi reveal d2">
-        <span class="stars">★★★★★</span>
-        <div class="result">"Minha agenda fechou o mês inteiro."</div>
-        <p class="body">Antes ficava dependendo de indicação. Agora chega cliente novo todo dia, sem eu precisar fazer nada.</p>
-        <div class="who">
-          <span class="ava" style="background:#00A75F">CA</span>
-          <div><b>Carla Alves</b><small>Estética · São Paulo</small></div>
-        </div>
-      </div>
-      <div class="testi reveal d3">
-        <span class="stars">★★★★★</span>
-        <div class="result">"Investi pouco e o retorno veio rápido."</div>
-        <p class="body">Pela primeira vez senti que o anúncio valeu a pena. Em duas semanas já tinha pago o plano.</p>
-        <div class="who">
-          <span class="ava" style="background:#F0B000">RM</span>
-          <div><b>Rafael Moura</b><small>Encanador · Belo Horizonte</small></div>
-        </div>
-      </div>
+      <p class="pricing-note reveal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"
+          stroke-linejoin="round">
+          <path d="M20 6L9 17l-5-5" />
+        </svg>
+        Sem contrato. Cancele quando quiser.
+      </p>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ============ PREÇOS ============ -->
-<section class="sec pricing-sec" id="precos">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <div class="kicker">Preços</div>
-      <h2>Escolha e comece hoje.</h2>
-      <p>Sem confusão. Sem letras miúdas. Você sabe exatamente o que paga.</p>
-    </div>
-    <div class="plans">
-      <div class="plan reveal d1" style="border:2px solid var(--amber)">
-        <span class="badge-pro" style="background:var(--green);color:#fff;box-shadow:0 8px 18px -6px rgba(0,193,110,.5)">🎉 3 meses grátis</span>
-        <div class="tag">Starter</div>
-        <div class="desc">Ideal pra quem está começando</div>
-        <div class="price">R$ 297<small>/mês</small></div>
-        <ul>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Anúncios criados e gerenciados</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Clientes direto no seu WhatsApp</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Relatório simples de resultados</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Suporte pelo WhatsApp</li>
-        </ul>
-        <button class="btn btn-green" onclick="openModal('Plano Starter')">Começar com o Starter</button>
+  <!-- ============ FAQ ============ -->
+  <section class="sec">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="kicker">Dúvidas</div>
+        <h2>Perguntas frequentes</h2>
       </div>
-      <div class="plan pro reveal d2">
-        <span class="badge-pro">⚡ Mais escolhido</span>
-        <div class="tag">Pro</div>
-        <div class="desc">Mais alcance, mais clientes</div>
-        <div class="price">R$ 497<small>/mês</small></div>
-        <ul>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Tudo do plano Starter</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Mais investimento em anúncios</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Mais alcance na sua região</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Otimização prioritária da equipe</li>
-        </ul>
-        <button class="btn btn-green" onclick="openModal('Plano Pro')">Quero o plano Pro</button>
-      </div>
-    </div>
-    <p class="pricing-note reveal">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
-      Sem contrato. Cancele quando quiser.
-    </p>
-  </div>
-</section>
-
-<!-- ============ FAQ ============ -->
-<section class="sec">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <div class="kicker">Dúvidas</div>
-      <h2>Perguntas frequentes</h2>
-    </div>
-    <div class="faq-list reveal d1">
-      <div class="faq-item">
-        <button class="faq-q">Preciso entender de marketing pra usar?<span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></button>
-        <div class="faq-a"><p>Não precisa de nada. Esse é justamente o nosso trabalho. Você cuida do seu serviço e a Leadz cuida de toda a parte de anúncios — do começo ao fim.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q">Quanto tempo leva pra ver resultado?<span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></button>
-        <div class="faq-a"><p>Na maioria dos casos, os primeiros contatos chegam já na primeira semana. Os resultados costumam crescer conforme os anúncios são otimizados pela nossa equipe.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q">Vocês cuidam de tudo mesmo?<span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></button>
-        <div class="faq-a"><p>Sim. Criação, publicação, ajustes e acompanhamento dos anúncios são por nossa conta. A única coisa que você faz é atender os clientes que chegam no seu WhatsApp.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q">Funciona pra qualquer tipo de serviço?<span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></button>
-        <div class="faq-a"><p>Funciona para a grande maioria dos serviços locais — eletricista, estética, manutenção, pintura, personal, encanador e muitos outros. Na dúvida, é só falar com a gente.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q">E se eu não gostar?<span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></button>
-        <div class="faq-a"><p>Sem problema. Você não fica preso a contrato e pode cancelar quando quiser. O primeiro mês ainda conta com a nossa garantia.</p></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ CTA FINAL ============ -->
-<section class="cta-final">
-  <div class="wrap reveal">
-    <h2>Pronto pra encher a agenda de clientes?</h2>
-    <p>Sem taxa de adesão. Primeiro mês com garantia.</p>
-    <button class="btn btn-white" onclick="openModal('CTA Final')">Começar agora</button>
-  </div>
-</section>
-
-<!-- ============ FOOTER ============ -->
-<footer>
-  <div class="wrap">
-    <div class="foot-top">
-      <div class="lead">
-        <a href="#top" class="logo nav-on-dark" aria-label="Leadz">
-          <span class="mark"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2L4.5 13.5h6L9 22l9.5-12.5h-6L13 2z" fill="#fff"/></svg></span>
-          <span class="word">Lead<span style="position:relative">z<span class="dot"></span></span></span>
-        </a>
-        <p>Mais clientes pra quem trabalha de verdade. A Leadz traz o cliente. Você fecha o negócio.</p>
-      </div>
-      <div class="foot-cols">
-        <div class="foot-col">
-          <h5>Navegação</h5>
-          <a href="#como-funciona">Como funciona</a>
-          <a href="#para-quem">Quem é pra você</a>
-          <a href="#precos">Preços</a>
+      <div class="faq-list reveal d1">
+        <div class="faq-item">
+          <button class="faq-q">Preciso entender de marketing pra usar?<span class="chev"><svg viewBox="0 0 24 24"
+                fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 9l6 6 6-6" />
+              </svg></span></button>
+          <div class="faq-a">
+            <p>Não precisa de nada. Esse é justamente o nosso trabalho. Você cuida do seu serviço e a Leadz cuida de
+              toda a parte de anúncios — do começo ao fim.</p>
+          </div>
         </div>
-        <div class="foot-col">
-          <h5>Legal</h5>
-          <a href="#">Política de privacidade</a>
-          <a href="#">Termos de uso</a>
+        <div class="faq-item">
+          <button class="faq-q">Quanto tempo leva pra ver resultado?<span class="chev"><svg viewBox="0 0 24 24"
+                fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 9l6 6 6-6" />
+              </svg></span></button>
+          <div class="faq-a">
+            <p>Na maioria dos casos, os primeiros contatos chegam já na primeira semana. Os resultados costumam crescer
+              conforme os anúncios são otimizados pela nossa equipe.</p>
+          </div>
         </div>
-        <div class="foot-col">
-          <h5>Fale com a gente</h5>
-          <a href="#">Instagram</a>
-          <a href="#">WhatsApp</a>
+        <div class="faq-item">
+          <button class="faq-q">Vocês cuidam de tudo mesmo?<span class="chev"><svg viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 9l6 6 6-6" />
+              </svg></span></button>
+          <div class="faq-a">
+            <p>Sim. Criação, publicação, ajustes e acompanhamento dos anúncios são por nossa conta. A única coisa que
+              você faz é atender os clientes que chegam no seu WhatsApp.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Funciona pra qualquer tipo de serviço?<span class="chev"><svg viewBox="0 0 24 24"
+                fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 9l6 6 6-6" />
+              </svg></span></button>
+          <div class="faq-a">
+            <p>Funciona para a grande maioria dos serviços locais — eletricista, estética, manutenção, pintura,
+              personal, encanador e muitos outros. Na dúvida, é só falar com a gente.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">E se eu não gostar?<span class="chev"><svg viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 9l6 6 6-6" />
+              </svg></span></button>
+          <div class="faq-a">
+            <p>Sem problema. Você não fica preso a contrato e pode cancelar quando quiser. O primeiro mês ainda conta
+              com a nossa garantia.</p>
+          </div>
         </div>
       </div>
     </div>
-    <div class="foot-bottom">
-      <span>Leadz © 2025 — Mais clientes pra quem trabalha de verdade &nbsp;·&nbsp; <a href="admin.html" style="color:#4a5e70;transition:color .15s" onmouseover="this.style.color='var(--green)'" onmouseout="this.style.color='#4a5e70'">Admin</a></span>
-      <div class="socials">
-        <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
-        <a href="#" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></a>
+  </section>
+
+  <!-- ============ CTA FINAL ============ -->
+  <section class="cta-final">
+    <div class="wrap reveal">
+      <h2>Pronto pra encher a agenda de clientes?</h2>
+      <p>Sem taxa de adesão. Primeiro mês com garantia.</p>
+      <button class="btn btn-white" onclick="openModal('CTA Final')">Começar agora</button>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer>
+    <div class="wrap">
+      <div class="foot-top">
+        <div class="lead">
+          <a href="#top" class="logo nav-on-dark" aria-label="Leadz">
+            <span class="mark"><svg viewBox="0 0 24 24" fill="none">
+                <path d="M13 2L4.5 13.5h6L9 22l9.5-12.5h-6L13 2z" fill="#fff" />
+              </svg></span>
+            <span class="word">Lead<span style="position:relative">z<span class="dot"></span></span></span>
+          </a>
+          <p>Mais clientes pra quem trabalha de verdade. A Leadz traz o cliente. Você fecha o negócio.</p>
+        </div>
+        <div class="foot-cols">
+          <div class="foot-col">
+            <h5>Navegação</h5>
+            <a href="#como-funciona">Como funciona</a>
+            <a href="#para-quem">Quem é pra você</a>
+            <a href="#precos">Preços</a>
+          </div>
+          <div class="foot-col">
+            <h5>Legal</h5>
+            <a href="#">Política de privacidade</a>
+            <a href="#">Termos de uso</a>
+          </div>
+          <div class="foot-col">
+            <h5>Fale com a gente</h5>
+            <a href="#">Instagram</a>
+            <a href="#">WhatsApp</a>
+          </div>
+        </div>
+      </div>
+      <div class="foot-bottom">
+        <span>Leadz © 2025 — Mais clientes pra quem trabalha de verdade &nbsp;·&nbsp; <a href="admin.html"
+            style="color:#4a5e70;transition:color .15s" onmouseover="this.style.color='var(--green)'"
+            onmouseout="this.style.color='#4a5e70'">Admin</a></span>
+        <div class="socials">
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5" />
+              <circle cx="12" cy="12" r="4" />
+              <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+            </svg></a>
+          <a href="#" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path
+                d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z" />
+            </svg></a>
+        </div>
       </div>
     </div>
-  </div>
-</footer>
+  </footer>
 
-<script>
-  // Navbar shadow on scroll
-  const nav=document.getElementById('nav');
-  const onScroll=()=>nav.classList.toggle('scrolled',window.scrollY>10);
-  onScroll();window.addEventListener('scroll',onScroll,{passive:true});
+  <script>
+    // Navbar shadow on scroll
+    const nav = document.getElementById('nav');
+    const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 10);
+    onScroll(); window.addEventListener('scroll', onScroll, { passive: true });
 
-  // Mobile menu
-  const toggle=document.getElementById('navToggle');
-  const menu=document.getElementById('mobileMenu');
-  toggle.addEventListener('click',()=>menu.classList.toggle('show'));
-  menu.querySelectorAll('a,button').forEach(el=>el.addEventListener('click',()=>menu.classList.remove('show')));
+    // Mobile menu
+    const toggle = document.getElementById('navToggle');
+    const menu = document.getElementById('mobileMenu');
+    toggle.addEventListener('click', () => menu.classList.toggle('show'));
+    menu.querySelectorAll('a,button').forEach(el => el.addEventListener('click', () => menu.classList.remove('show')));
 
-  // Modal
-  const overlay=document.getElementById('modalOverlay');
-  const leadForm=document.getElementById('leadForm');
-  const formSuccess=document.getElementById('formSuccess');
+    // Modal
+    const overlay = document.getElementById('modalOverlay');
+    const leadForm = document.getElementById('leadForm');
+    const formSuccess = document.getElementById('formSuccess');
 
-  function openModal(origem){
-    const isPromo = origem==='Promo Bar';
-    document.getElementById('formOrigem').value=origem||'';
-    document.getElementById('modalTitle').innerHTML = isPromo
-      ? '🎉 Garanta seus <span class="hl">3 meses grátis</span>'
-      : 'Receba leads <span class="hl">pré-qualificados</span>';
-    document.getElementById('modalSub').textContent = isPromo
-      ? 'Vagas limitadas! Preencha agora e garanta acesso gratuito por 3 meses completos.'
-      : 'Preencha abaixo e nossa equipe entra em contato em até 24h.';
-    overlay.classList.add('show');
-    overlay.setAttribute('aria-hidden','false');
-    document.body.style.overflow='hidden';
-    leadForm.style.display='';
-    formSuccess.classList.remove('show');
-    clearFormError();
-    leadForm.querySelectorAll('.err').forEach(el=>el.classList.remove('err'));
-    setTimeout(()=>{const f=leadForm.querySelector('input');if(f)f.focus();},340);
-  }
-  function closeModal(){
-    overlay.classList.remove('show');
-    overlay.setAttribute('aria-hidden','true');
-    document.body.style.overflow='';
-  }
-  function closePromo(){
-    const bar=document.getElementById('promoBar');
-    bar.style.height=bar.offsetHeight+'px';
-    bar.style.transition='height .3s ease, opacity .3s ease';
-    requestAnimationFrame(()=>{bar.style.height='0';bar.style.opacity='0';});
-    setTimeout(()=>{bar.style.display='none';document.getElementById('nav').classList.add('promo-gone');},320);
-  }
-  document.getElementById('modalClose').addEventListener('click',closeModal);
-  overlay.addEventListener('click',e=>{if(e.target===overlay)closeModal();});
-  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&overlay.classList.contains('show'))closeModal();});
-
-  const SUBMIT_BTN_HTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" width="19" height="19"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Quero receber leads qualificados';
-
-  function showFormError(msg){
-    let el=leadForm.querySelector('.form-err-msg');
-    if(!el){el=document.createElement('p');el.className='form-err-msg';el.style.cssText='color:#e53e3e;font-size:.86rem;font-weight:600;text-align:center;margin-top:4px';leadForm.appendChild(el);}
-    el.textContent=msg;
-  }
-  function clearFormError(){const el=leadForm.querySelector('.form-err-msg');if(el)el.textContent='';}
-
-  leadForm.addEventListener('submit',async e=>{
-    e.preventDefault();
-    clearFormError();
-    let ok=true;
-
-    leadForm.querySelectorAll('[required]').forEach(inp=>{
-      inp.classList.remove('err');
-      if(!inp.value.trim()){inp.classList.add('err');ok=false;}
-    });
-
-    // Validar formato do e-mail
-    const emailInp=leadForm.querySelector('[name=email]');
-    if(emailInp && emailInp.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInp.value)){
-      emailInp.classList.add('err');
-      showFormError('Digite um e-mail válido (ex: joao@imobiliaria.com.br)');
-      ok=false;
+    function openModal(origem) {
+      const isPromo = origem === 'Promo Bar';
+      document.getElementById('formOrigem').value = origem || '';
+      document.getElementById('modalTitle').innerHTML = isPromo
+        ? '🎉 Garanta seus <span class="hl">3 meses grátis</span>'
+        : 'Receba leads <span class="hl">pré-qualificados</span>';
+      document.getElementById('modalSub').textContent = isPromo
+        ? 'Vagas limitadas! Preencha agora e garanta acesso gratuito por 3 meses completos.'
+        : 'Preencha abaixo e nossa equipe entra em contato em até 24h.';
+      overlay.classList.add('show');
+      overlay.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      leadForm.style.display = '';
+      formSuccess.classList.remove('show');
+      clearFormError();
+      leadForm.querySelectorAll('.err').forEach(el => el.classList.remove('err'));
+      setTimeout(() => { const f = leadForm.querySelector('input'); if (f) f.focus(); }, 340);
     }
+    function closeModal() {
+      overlay.classList.remove('show');
+      overlay.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+    function closePromo() {
+      const bar = document.getElementById('promoBar');
+      bar.style.height = bar.offsetHeight + 'px';
+      bar.style.transition = 'height .3s ease, opacity .3s ease';
+      requestAnimationFrame(() => { bar.style.height = '0'; bar.style.opacity = '0'; });
+      setTimeout(() => { bar.style.display = 'none'; document.getElementById('nav').classList.add('promo-gone'); }, 320);
+    }
+    document.getElementById('modalClose').addEventListener('click', closeModal);
+    overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && overlay.classList.contains('show')) closeModal(); });
 
-    if(!ok)return;
+    const SUBMIT_BTN_HTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" width="19" height="19"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Quero receber leads qualificados';
 
-    const dados=Object.fromEntries(new FormData(leadForm));
-    const submitBtn=leadForm.querySelector('[type=submit]');
-    submitBtn.disabled=true;
-    submitBtn.textContent='Enviando…';
+    function showFormError(msg) {
+      let el = leadForm.querySelector('.form-err-msg');
+      if (!el) { el = document.createElement('p'); el.className = 'form-err-msg'; el.style.cssText = 'color:#e53e3e;font-size:.86rem;font-weight:600;text-align:center;margin-top:4px'; leadForm.appendChild(el); }
+      el.textContent = msg;
+    }
+    function clearFormError() { const el = leadForm.querySelector('.form-err-msg'); if (el) el.textContent = ''; }
 
-    try{
-      const res=await fetch('https://formspree.io/f/mredvojn',{
-        method:'POST',
-        headers:{'Accept':'application/json','Content-Type':'application/json'},
-        body:JSON.stringify({...dados,data:new Date().toLocaleString('pt-BR')})
+    leadForm.addEventListener('submit', async e => {
+      e.preventDefault();
+      clearFormError();
+      let ok = true;
+
+      leadForm.querySelectorAll('[required]').forEach(inp => {
+        inp.classList.remove('err');
+        if (!inp.value.trim()) { inp.classList.add('err'); ok = false; }
       });
-      const json=await res.json();
-      if(!res.ok){
-        const msg=json.errors?json.errors.map(er=>er.message||er.code).join(', '):json.error||'Erro ao enviar';
-        throw new Error(msg);
+
+      // Validar formato do e-mail
+      const emailInp = leadForm.querySelector('[name=email]');
+      if (emailInp && emailInp.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInp.value)) {
+        emailInp.classList.add('err');
+        showFormError('Digite um e-mail válido (ex: joao@imobiliaria.com.br)');
+        ok = false;
       }
-    }catch(err){
-      submitBtn.disabled=false;
-      submitBtn.innerHTML=SUBMIT_BTN_HTML;
-      showFormError(err.message||'Erro ao enviar. Tente novamente.');
-      return;
-    }
 
-    leadForm.style.display='none';
-    formSuccess.classList.add('show');
-    document.getElementById('successName').textContent=dados.nome.split(' ')[0];
-  });
+      if (!ok) return;
 
-  // FAQ accordion
-  document.querySelectorAll('.faq-item').forEach(item=>{
-    const q=item.querySelector('.faq-q');
-    const a=item.querySelector('.faq-a');
-    q.addEventListener('click',()=>{
-      const open=item.classList.contains('open');
-      document.querySelectorAll('.faq-item').forEach(i=>{i.classList.remove('open');i.querySelector('.faq-a').style.maxHeight=null});
-      if(!open){item.classList.add('open');a.style.maxHeight=a.scrollHeight+'px';}
+      const dados = Object.fromEntries(new FormData(leadForm));
+      const submitBtn = leadForm.querySelector('[type=submit]');
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Enviando…';
+
+      try {
+        const res = await fetch('https://formspree.io/f/mredvojn', {
+          method: 'POST',
+          headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+          body: JSON.stringify({ ...dados, data: new Date().toLocaleString('pt-BR') })
+        });
+        const json = await res.json();
+        if (!res.ok) {
+          const msg = json.errors ? json.errors.map(er => er.message || er.code).join(', ') : json.error || 'Erro ao enviar';
+          throw new Error(msg);
+        }
+      } catch (err) {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = SUBMIT_BTN_HTML;
+        showFormError(err.message || 'Erro ao enviar. Tente novamente.');
+        return;
+      }
+
+      leadForm.style.display = 'none';
+      formSuccess.classList.add('show');
+      document.getElementById('successName').textContent = dados.nome.split(' ')[0];
     });
-  });
 
-  // Scroll reveal
-  const io=new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}});
-  },{threshold:.12,rootMargin:'0px 0px -40px 0px'});
-  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+    // FAQ accordion
+    document.querySelectorAll('.faq-item').forEach(item => {
+      const q = item.querySelector('.faq-q');
+      const a = item.querySelector('.faq-a');
+      q.addEventListener('click', () => {
+        const open = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(i => { i.classList.remove('open'); i.querySelector('.faq-a').style.maxHeight = null });
+        if (!open) { item.classList.add('open'); a.style.maxHeight = a.scrollHeight + 'px'; }
+      });
+    });
 
-  // Safety fallback: if IO never fires (some embedded/preview environments),
-  // force everything visible so content is never blank.
-  setTimeout(()=>{document.querySelectorAll('.reveal:not(.visible)').forEach(el=>el.classList.add('visible'));},1400);
-</script>
+    // Scroll reveal
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+    }, { threshold: .12, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-<!-- Vercel Analytics -->
-<script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};</script>
-<script defer src="/_vercel/insights/script.js"></script>
+    // Safety fallback: if IO never fires (some embedded/preview environments),
+    // force everything visible so content is never blank.
+    setTimeout(() => { document.querySelectorAll('.reveal:not(.visible)').forEach(el => el.classList.add('visible')); }, 1400);
+  </script>
+
+  <!-- Vercel Analytics -->
+  <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments) };</script>
+  <script defer src="/_vercel/insights/script.js"></script>
 </body>
+
 </html>
