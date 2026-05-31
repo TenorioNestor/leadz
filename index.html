@@ -355,6 +355,65 @@
     .wrap{padding:0 18px}
     .phone{width:270px;height:560px}
   }
+
+  /* ---------- Modal ---------- */
+  .modal-overlay{
+    position:fixed;inset:0;z-index:200;
+    background:rgba(10,22,40,.68);backdrop-filter:blur(6px);
+    display:flex;align-items:center;justify-content:center;padding:20px;
+    opacity:0;pointer-events:none;transition:opacity .25s ease;
+  }
+  .modal-overlay.show{opacity:1;pointer-events:all}
+  .modal-box{
+    background:#fff;border-radius:var(--radius-lg);
+    width:100%;max-width:520px;max-height:92vh;overflow-y:auto;
+    padding:38px 36px;position:relative;
+    box-shadow:0 48px 96px -24px rgba(10,22,40,.5);
+    transform:translateY(30px) scale(.97);
+    transition:transform .32s cubic-bezier(.22,.61,.36,1);
+    scrollbar-width:thin;
+  }
+  .modal-overlay.show .modal-box{transform:none}
+  .modal-close{
+    position:absolute;top:14px;right:14px;width:36px;height:36px;
+    border-radius:50%;border:0;background:var(--gray-100);cursor:pointer;
+    display:grid;place-items:center;transition:background .15s;
+  }
+  .modal-close:hover{background:var(--gray-200)}
+  .modal-close svg{width:18px;height:18px;color:var(--muted)}
+  .modal-hd{text-align:center;margin-bottom:26px}
+  .modal-hd .logo{justify-content:center;margin-bottom:14px}
+  .modal-hd h2{font-family:var(--head);font-size:1.52rem;color:var(--navy);margin:0 0 8px;font-weight:800;line-height:1.2;letter-spacing:-.02em}
+  .modal-hd h2 .hl{color:var(--green)}
+  .modal-hd p{color:var(--muted);font-size:.93rem}
+  .form-grid{display:flex;flex-direction:column;gap:14px}
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .field{display:flex;flex-direction:column;gap:5px}
+  .field label{font-family:var(--head);font-weight:700;font-size:.84rem;color:var(--navy)}
+  .field label .opt{font-weight:500;color:var(--muted-light);font-size:.77rem}
+  .field input,.field select{
+    height:46px;border-radius:11px;border:1.5px solid var(--gray-200);
+    padding:0 13px;font-family:var(--body);font-size:.94rem;color:var(--ink);
+    outline:none;background:#fff;transition:border-color .15s,box-shadow .15s;
+  }
+  .field select{
+    appearance:none;-webkit-appearance:none;cursor:pointer;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235B6B7B' stroke-width='2.2' stroke-linecap='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;background-position:right 11px center;background-size:17px;padding-right:34px;
+  }
+  .field input:focus,.field select:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(0,193,110,.14)}
+  .field input.err,.field select.err{border-color:#e53e3e;box-shadow:0 0 0 3px rgba(229,62,62,.1)}
+  .form-note{text-align:center;font-size:.79rem;color:var(--muted-light);margin-top:2px}
+  .form-success{display:none;text-align:center;padding:14px 0 6px}
+  .form-success.show{display:block}
+  .suc-ic{width:70px;height:70px;border-radius:50%;background:var(--green-soft);display:grid;place-items:center;margin:0 auto 18px}
+  .suc-ic svg{width:34px;height:34px;color:var(--green)}
+  .form-success h3{font-family:var(--head);font-size:1.4rem;color:var(--navy);margin-bottom:8px;font-weight:800}
+  .form-success p{color:var(--muted);font-size:.95rem;line-height:1.55}
+  @media(max-width:520px){
+    .modal-box{padding:26px 18px}
+    .form-row{grid-template-columns:1fr}
+  }
 </style>
 </head>
 <body>
@@ -374,7 +433,7 @@
       <a href="#precos" class="link">Preços</a>
     </nav>
     <div class="nav-cta">
-      <a href="#precos" class="btn btn-green">Quero receber leads</a>
+      <button class="btn btn-green" onclick="openModal('Navbar')">Quero receber leads</button>
       <button class="nav-toggle" id="navToggle" aria-label="Menu">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
       </button>
@@ -385,10 +444,83 @@
   <a href="#como-funciona" class="link">Como funciona</a>
   <a href="#para-quem" class="link">Pra quem é</a>
   <a href="#precos" class="link">Preços</a>
-  <a href="#precos" class="btn btn-green">Quero receber leads</a>
+  <button class="btn btn-green" onclick="openModal('Menu Mobile')">Quero receber leads</button>
 </div>
 
 <span id="top"></span>
+
+<!-- ============ MODAL FORMULÁRIO ============ -->
+<div class="modal-overlay" id="modalOverlay" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal-box">
+    <button class="modal-close" id="modalClose" aria-label="Fechar">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+    <div class="modal-hd">
+      <span class="logo"><span class="mark"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2L4.5 13.5h6L9 22l9.5-12.5h-6L13 2z" fill="#fff"/></svg></span><span class="word">Lead<span style="position:relative">z<span class="dot"></span></span></span></span>
+      <h2 id="modalTitle">Receba leads <span class="hl">pré-qualificados</span></h2>
+      <p>Preencha abaixo e nossa equipe entra em contato em até 24h.</p>
+    </div>
+    <form class="form-grid" id="leadForm" novalidate>
+      <input type="hidden" name="origem" id="formOrigem">
+      <div class="form-row">
+        <div class="field">
+          <label>Nome completo</label>
+          <input type="text" name="nome" placeholder="João Silva" required>
+        </div>
+        <div class="field">
+          <label>WhatsApp</label>
+          <input type="tel" name="whatsapp" placeholder="(11) 99999-9999" required>
+        </div>
+      </div>
+      <div class="field">
+        <label>E-mail profissional</label>
+        <input type="email" name="email" placeholder="joao@imobiliaria.com.br" required>
+      </div>
+      <div class="form-row">
+        <div class="field">
+          <label>CRECI <span class="opt">(opcional)</span></label>
+          <input type="text" name="creci" placeholder="123456-F">
+        </div>
+        <div class="field">
+          <label>Cidade de atuação</label>
+          <input type="text" name="cidade" placeholder="São Paulo - SP" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="field">
+          <label>Leads por mês</label>
+          <select name="leads_mes" required>
+            <option value="">Selecione...</option>
+            <option>10 a 20 leads/mês</option>
+            <option>20 a 50 leads/mês</option>
+            <option>50 a 100 leads/mês</option>
+            <option>Mais de 100 leads/mês</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Foco de atuação</label>
+          <select name="foco" required>
+            <option value="">Selecione...</option>
+            <option>Residencial</option>
+            <option>Comercial</option>
+            <option>Ambos</option>
+          </select>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-green btn-lg" style="width:100%;margin-top:4px">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" width="19" height="19"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        Quero receber leads qualificados
+      </button>
+      <p class="form-note">Sem taxa de adesão · Retorno em até 24h</p>
+    </form>
+    <div class="form-success" id="formSuccess">
+      <div class="suc-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+      <h3>Cadastro recebido!</h3>
+      <p>Nossa equipe vai entrar em contato pelo WhatsApp em até 24h.<br>Bem-vindo, <strong id="successName"></strong>!</p>
+      <button class="btn btn-green" style="margin-top:22px" onclick="closeModal()">Fechar</button>
+    </div>
+  </div>
+</div>
 
 <!-- ============ HERO ============ -->
 <section class="hero">
@@ -398,7 +530,7 @@
       <h1 class="reveal d1">Leads imobiliários que já sabem o que querem <span class="hl">— e quanto podem pagar.</span></h1>
       <p class="sub reveal d2">A Lara, nossa IA, conversa com o comprador, valida o perfil de busca e o limite de crédito — e entrega o lead pronto no seu WhatsApp. Você só fecha.</p>
       <div class="hero-ctas reveal d3">
-        <a href="#precos" class="btn btn-green btn-lg">Quero receber leads</a>
+        <button class="btn btn-green btn-lg" onclick="openModal('Hero')">Quero receber leads</button>
         <a href="#como-funciona" class="link-down">Ver como funciona
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
         </a>
@@ -597,7 +729,7 @@
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Relatório simples de resultados</li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Suporte pelo WhatsApp</li>
         </ul>
-        <a href="#" class="btn btn-green">Começar com o Starter</a>
+        <button class="btn btn-green" onclick="openModal('Plano Starter')">Começar com o Starter</button>
       </div>
       <div class="plan pro reveal d2">
         <span class="badge-pro">⚡ Mais escolhido</span>
@@ -610,7 +742,7 @@
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Mais alcance na sua região</li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Otimização prioritária da equipe</li>
         </ul>
-        <a href="#" class="btn btn-green">Quero o plano Pro</a>
+        <button class="btn btn-green" onclick="openModal('Plano Pro')">Quero o plano Pro</button>
       </div>
     </div>
     <p class="pricing-note reveal">
@@ -657,7 +789,7 @@
   <div class="wrap reveal">
     <h2>Pronto pra encher a agenda de clientes?</h2>
     <p>Sem taxa de adesão. Primeiro mês com garantia.</p>
-    <a href="#precos" class="btn btn-white">Começar agora</a>
+    <button class="btn btn-white" onclick="openModal('CTA Final')">Começar agora</button>
   </div>
 </section>
 
@@ -711,7 +843,49 @@
   const toggle=document.getElementById('navToggle');
   const menu=document.getElementById('mobileMenu');
   toggle.addEventListener('click',()=>menu.classList.toggle('show'));
-  menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>menu.classList.remove('show')));
+  menu.querySelectorAll('a,button').forEach(el=>el.addEventListener('click',()=>menu.classList.remove('show')));
+
+  // Modal
+  const overlay=document.getElementById('modalOverlay');
+  const leadForm=document.getElementById('leadForm');
+  const formSuccess=document.getElementById('formSuccess');
+
+  function openModal(origem){
+    document.getElementById('formOrigem').value=origem||'';
+    overlay.classList.add('show');
+    overlay.setAttribute('aria-hidden','false');
+    document.body.style.overflow='hidden';
+    leadForm.style.display='';
+    formSuccess.classList.remove('show');
+    leadForm.querySelectorAll('.err').forEach(el=>el.classList.remove('err'));
+    setTimeout(()=>{const f=leadForm.querySelector('input');if(f)f.focus();},340);
+  }
+  function closeModal(){
+    overlay.classList.remove('show');
+    overlay.setAttribute('aria-hidden','true');
+    document.body.style.overflow='';
+  }
+  document.getElementById('modalClose').addEventListener('click',closeModal);
+  overlay.addEventListener('click',e=>{if(e.target===overlay)closeModal();});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&overlay.classList.contains('show'))closeModal();});
+
+  leadForm.addEventListener('submit',e=>{
+    e.preventDefault();
+    let ok=true;
+    leadForm.querySelectorAll('[required]').forEach(inp=>{
+      inp.classList.remove('err');
+      if(!inp.value.trim()){inp.classList.add('err');ok=false;}
+    });
+    if(!ok)return;
+    const dados=Object.fromEntries(new FormData(leadForm));
+    const chave='leadz_submissions';
+    const lista=JSON.parse(localStorage.getItem(chave)||'[]');
+    lista.unshift({id:Date.now(),data:new Date().toLocaleString('pt-BR'),...dados});
+    localStorage.setItem(chave,JSON.stringify(lista));
+    leadForm.style.display='none';
+    formSuccess.classList.add('show');
+    document.getElementById('successName').textContent=dados.nome.split(' ')[0];
+  });
 
   // FAQ accordion
   document.querySelectorAll('.faq-item').forEach(item=>{

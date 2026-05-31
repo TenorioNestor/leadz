@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leadz — Painel Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --green:#00C16E;--green-dark:#00A75F;--green-soft:#E6F9F1;
+    --navy:#0A1628;--navy-soft:#13233C;--amber:#FFC107;
+    --white:#FFFFFF;--gray-50:#F7F9F8;--gray-100:#F5F5F5;--gray-200:#EAEDEC;
+    --ink:#0A1628;--muted:#5B6B7B;--muted-light:#8A98A6;
+    --radius:14px;--radius-lg:22px;
+    --shadow-sm:0 2px 10px rgba(10,22,40,.06);
+    --shadow:0 18px 50px -18px rgba(10,22,40,.20);
+    --head:'Plus Jakarta Sans',system-ui,sans-serif;
+    --body:'Inter',system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--body);color:var(--ink);background:var(--gray-50);-webkit-font-smoothing:antialiased;min-height:100vh}
+  h1,h2,h3,h4{font-family:var(--head);line-height:1.15;letter-spacing:-.02em;font-weight:800}
+  a{text-decoration:none;color:inherit}
+
+  /* ---------- Logo ---------- */
+  .logo{display:inline-flex;align-items:center;gap:10px;font-family:var(--head);font-weight:800}
+  .logo .mark{width:36px;height:36px;border-radius:10px;background:linear-gradient(150deg,var(--green),#00D97A);display:grid;place-items:center;box-shadow:0 6px 16px -4px rgba(0,193,110,.6);flex:none}
+  .logo .mark svg{width:20px;height:20px}
+  .logo .word{font-size:1.4rem;letter-spacing:-.04em;color:var(--navy)}
+  .logo .dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--amber);margin-left:1px;vertical-align:super;position:relative;top:-2px}
+  .nav-on-dark .word{color:#fff}
+
+  /* ========== LOGIN ========== */
+  #loginScreen{
+    min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    background:linear-gradient(150deg,var(--navy) 0%,#0d1e35 100%);
+    padding:24px;
+  }
+  .login-box{
+    background:#fff;border-radius:var(--radius-lg);padding:44px 40px;
+    width:100%;max-width:420px;box-shadow:0 48px 96px -24px rgba(10,22,40,.5);
+    text-align:center;
+  }
+  .login-box .logo{justify-content:center;margin-bottom:28px}
+  .login-box h2{font-size:1.5rem;color:var(--navy);margin-bottom:6px}
+  .login-box p{color:var(--muted);font-size:.93rem;margin-bottom:28px}
+  .login-field{display:flex;flex-direction:column;gap:6px;text-align:left;margin-bottom:14px}
+  .login-field label{font-family:var(--head);font-weight:700;font-size:.84rem;color:var(--navy)}
+  .login-field input{
+    height:48px;border-radius:12px;border:1.5px solid var(--gray-200);
+    padding:0 14px;font-family:var(--body);font-size:.96rem;color:var(--ink);
+    outline:none;transition:border-color .15s,box-shadow .15s;
+  }
+  .login-field input:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(0,193,110,.14)}
+  .login-field input.err{border-color:#e53e3e}
+  .login-err{color:#e53e3e;font-size:.84rem;margin-bottom:14px;display:none;font-weight:600}
+  .login-err.show{display:block}
+  .btn-login{
+    width:100%;height:50px;border-radius:999px;border:0;cursor:pointer;
+    background:var(--green);color:#fff;font-family:var(--head);font-weight:700;font-size:1rem;
+    box-shadow:0 16px 40px -12px rgba(0,193,110,.45);
+    transition:background .18s,transform .18s;
+  }
+  .btn-login:hover{background:var(--green-dark);transform:translateY(-2px)}
+
+  /* ========== DASHBOARD ========== */
+  #dashboard{display:none;min-height:100vh;flex-direction:column}
+  #dashboard.show{display:flex}
+
+  .adm-nav{
+    background:var(--navy);padding:0 28px;height:64px;
+    display:flex;align-items:center;justify-content:space-between;
+    box-shadow:0 4px 24px -8px rgba(10,22,40,.4);position:sticky;top:0;z-index:50;
+  }
+  .adm-nav .logo .word{color:#fff}
+  .adm-nav .badge{background:rgba(0,193,110,.2);color:var(--green);font-family:var(--head);font-weight:700;font-size:.76rem;padding:4px 10px;border-radius:999px;margin-left:10px}
+  .adm-right{display:flex;align-items:center;gap:12px}
+  .btn-sm{
+    display:inline-flex;align-items:center;gap:7px;
+    font-family:var(--head);font-weight:700;font-size:.84rem;
+    padding:9px 18px;border-radius:999px;border:0;cursor:pointer;
+    transition:transform .15s,box-shadow .15s,background .15s;white-space:nowrap;
+  }
+  .btn-sm svg{width:16px;height:16px}
+  .btn-green{background:var(--green);color:#fff;box-shadow:0 8px 20px -8px rgba(0,193,110,.4)}
+  .btn-green:hover{background:var(--green-dark);transform:translateY(-1px)}
+  .btn-outline{background:transparent;color:#9fb0c0;border:1px solid rgba(255,255,255,.15)}
+  .btn-outline:hover{background:rgba(255,255,255,.08);color:#fff}
+
+  .adm-body{flex:1;padding:32px 28px;max-width:1300px;width:100%;margin:0 auto}
+
+  /* stats cards */
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:28px}
+  .stat{background:#fff;border-radius:var(--radius);padding:22px 24px;box-shadow:var(--shadow-sm);border:1px solid var(--gray-200)}
+  .stat .val{font-family:var(--head);font-weight:800;font-size:2.2rem;color:var(--navy);letter-spacing:-.03em;line-height:1}
+  .stat .lbl{font-size:.84rem;color:var(--muted);margin-top:4px;font-weight:500}
+  .stat .sub{font-size:.78rem;color:var(--green);font-weight:700;margin-top:6px}
+
+  /* table */
+  .tbl-wrap{background:#fff;border-radius:var(--radius-lg);box-shadow:var(--shadow-sm);border:1px solid var(--gray-200);overflow:hidden}
+  .tbl-head{padding:20px 24px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--gray-200);flex-wrap:wrap;gap:12px}
+  .tbl-head h3{font-size:1.1rem;color:var(--navy)}
+  .tbl-head .actions{display:flex;gap:8px}
+  .tbl-actions .btn-sm{font-size:.82rem;padding:8px 14px}
+  .btn-export{background:var(--green-soft);color:var(--green-dark);border:0}
+  .btn-export:hover{background:#d0f5e8;transform:translateY(-1px)}
+  .btn-clear{background:#fff3f3;color:#e53e3e;border:1px solid #fecaca}
+  .btn-clear:hover{background:#fee2e2}
+  table{width:100%;border-collapse:collapse}
+  thead th{
+    padding:11px 16px;text-align:left;font-family:var(--head);font-weight:700;font-size:.78rem;
+    color:var(--muted);text-transform:uppercase;letter-spacing:.07em;
+    background:var(--gray-50);border-bottom:1px solid var(--gray-200);white-space:nowrap;
+  }
+  tbody tr{border-bottom:1px solid var(--gray-100);transition:background .12s}
+  tbody tr:last-child{border-bottom:0}
+  tbody tr:hover{background:var(--gray-50)}
+  td{padding:13px 16px;font-size:.88rem;color:var(--ink);vertical-align:middle}
+  td .name{font-family:var(--head);font-weight:700;color:var(--navy);font-size:.92rem}
+  td .sub{color:var(--muted-light);font-size:.79rem;margin-top:1px}
+  .pill{display:inline-block;padding:3px 9px;border-radius:999px;font-size:.74rem;font-weight:700;font-family:var(--head)}
+  .pill-green{background:var(--green-soft);color:var(--green-dark)}
+  .pill-amber{background:rgba(255,193,7,.15);color:#b07e00}
+  .pill-navy{background:rgba(10,22,40,.08);color:var(--navy)}
+  .btn-del{background:none;border:0;cursor:pointer;width:30px;height:30px;border-radius:8px;display:grid;place-items:center;color:var(--muted-light);transition:background .12s,color .12s}
+  .btn-del:hover{background:#fee2e2;color:#e53e3e}
+  .btn-del svg{width:16px;height:16px}
+  .empty{text-align:center;padding:64px 24px;color:var(--muted)}
+  .empty svg{width:48px;height:48px;color:var(--gray-200);display:block;margin:0 auto 14px}
+  .empty p{font-size:1rem}
+  .empty small{font-size:.86rem;color:var(--muted-light)}
+
+  @media(max-width:900px){
+    .stats{grid-template-columns:repeat(2,1fr)}
+    .adm-body{padding:20px 16px}
+    .tbl-wrap{overflow-x:auto}
+    table{min-width:720px}
+  }
+  @media(max-width:520px){
+    .stats{grid-template-columns:1fr 1fr}
+    .adm-nav{padding:0 16px}
+    .adm-nav .badge{display:none}
+  }
+</style>
+</head>
+<body>
+
+<!-- ========== TELA DE LOGIN ========== -->
+<div id="loginScreen">
+  <div class="login-box">
+    <span class="logo" style="justify-content:center;display:inline-flex;margin-bottom:28px">
+      <span class="mark"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2L4.5 13.5h6L9 22l9.5-12.5h-6L13 2z" fill="#fff"/></svg></span>
+      <span class="word">Lead<span style="position:relative">z<span class="dot"></span></span></span>
+    </span>
+    <h2>Acesso restrito</h2>
+    <p>Painel exclusivo para administradores da Leadz.</p>
+    <div class="login-field">
+      <label>Login</label>
+      <input type="text" id="loginUser" placeholder="leadzadm" autocomplete="username">
+    </div>
+    <div class="login-field">
+      <label>Senha</label>
+      <input type="password" id="loginPass" placeholder="••••••••" autocomplete="current-password">
+    </div>
+    <div class="login-err" id="loginErr">Login ou senha incorretos.</div>
+    <button class="btn-login" onclick="doLogin()">Entrar no painel</button>
+  </div>
+</div>
+
+<!-- ========== DASHBOARD ========== -->
+<div id="dashboard">
+  <nav class="adm-nav">
+    <div style="display:flex;align-items:center">
+      <span class="logo nav-on-dark">
+        <span class="mark"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2L4.5 13.5h6L9 22l9.5-12.5h-6L13 2z" fill="#fff"/></svg></span>
+        <span class="word">Lead<span style="position:relative">z<span class="dot"></span></span></span>
+      </span>
+      <span class="badge">Admin</span>
+    </div>
+    <div class="adm-right">
+      <a href="index.html" target="_blank" class="btn-sm btn-outline">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        Ver LP
+      </a>
+      <button class="btn-sm btn-outline" onclick="doLogout()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        Sair
+      </button>
+    </div>
+  </nav>
+
+  <div class="adm-body">
+
+    <!-- Stats -->
+    <div class="stats" id="statsRow">
+      <div class="stat">
+        <div class="val" id="statTotal">0</div>
+        <div class="lbl">Total de cadastros</div>
+        <div class="sub" id="statHoje">0 hoje</div>
+      </div>
+      <div class="stat">
+        <div class="val" id="statStarter">0</div>
+        <div class="lbl">Interesse Starter</div>
+      </div>
+      <div class="stat">
+        <div class="val" id="statPro">0</div>
+        <div class="lbl">Interesse Pro</div>
+      </div>
+      <div class="stat">
+        <div class="val" id="statLeads100">0</div>
+        <div class="lbl">Querem +100 leads/mês</div>
+      </div>
+    </div>
+
+    <!-- Table -->
+    <div class="tbl-wrap">
+      <div class="tbl-head">
+        <h3>Cadastros de corretores</h3>
+        <div class="actions tbl-actions" style="display:flex;gap:8px">
+          <button class="btn-sm btn-export" onclick="exportCSV()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Exportar CSV
+          </button>
+          <button class="btn-sm btn-clear" onclick="clearAll()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
+            Limpar todos
+          </button>
+        </div>
+      </div>
+      <div id="tableWrap">
+        <table id="submissionsTable">
+          <thead>
+            <tr>
+              <th>Nome / E-mail</th>
+              <th>WhatsApp</th>
+              <th>CRECI</th>
+              <th>Cidade</th>
+              <th>Leads/mês</th>
+              <th>Foco</th>
+              <th>Origem</th>
+              <th>Data</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="tableBody"></tbody>
+        </table>
+        <div class="empty" id="emptyState" style="display:none">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          <p>Nenhum cadastro ainda.</p>
+          <small>Os cadastros feitos na landing page aparecem aqui.</small>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  const STORAGE_KEY = 'leadz_submissions';
+  const ADMIN_USER  = 'leadzadm';
+  const ADMIN_PASS  = 'leadz2026sw';
+  const SESSION_KEY = 'leadz_admin_ok';
+
+  /* ---- Auth ---- */
+  function doLogin() {
+    const u = document.getElementById('loginUser').value.trim();
+    const p = document.getElementById('loginPass').value;
+    const err = document.getElementById('loginErr');
+    if (u === ADMIN_USER && p === ADMIN_PASS) {
+      sessionStorage.setItem(SESSION_KEY, '1');
+      err.classList.remove('show');
+      showDashboard();
+    } else {
+      err.classList.add('show');
+      document.getElementById('loginPass').classList.add('err');
+      setTimeout(() => document.getElementById('loginPass').classList.remove('err'), 1200);
+    }
+  }
+
+  function doLogout() {
+    sessionStorage.removeItem(SESSION_KEY);
+    document.getElementById('dashboard').classList.remove('show');
+    document.getElementById('loginScreen').style.display = 'flex';
+    document.getElementById('loginUser').value = '';
+    document.getElementById('loginPass').value = '';
+  }
+
+  document.getElementById('loginPass').addEventListener('keydown', e => {
+    if (e.key === 'Enter') doLogin();
+  });
+  document.getElementById('loginUser').addEventListener('keydown', e => {
+    if (e.key === 'Enter') document.getElementById('loginPass').focus();
+  });
+
+  /* ---- Data ---- */
+  function getSubmissions() {
+    return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+  }
+
+  function saveSubmissions(list) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+  }
+
+  function deleteEntry(id) {
+    if (!confirm('Remover este cadastro?')) return;
+    const updated = getSubmissions().filter(s => s.id !== id);
+    saveSubmissions(updated);
+    renderTable();
+  }
+
+  function clearAll() {
+    if (!confirm('Apagar TODOS os cadastros? Esta ação não pode ser desfeita.')) return;
+    saveSubmissions([]);
+    renderTable();
+  }
+
+  /* ---- Render ---- */
+  function pill(text, cls) {
+    return `<span class="pill ${cls}">${text}</span>`;
+  }
+
+  function foco_pill(f) {
+    if (!f) return '—';
+    if (f === 'Residencial') return pill(f, 'pill-green');
+    if (f === 'Comercial')   return pill(f, 'pill-amber');
+    return pill(f, 'pill-navy');
+  }
+
+  function origem_pill(o) {
+    if (!o) return '—';
+    if (o.includes('Pro'))     return pill(o, 'pill-amber');
+    if (o.includes('Starter')) return pill(o, 'pill-green');
+    return pill(o, 'pill-navy');
+  }
+
+  function renderTable() {
+    const list = getSubmissions();
+    const tbody = document.getElementById('tableBody');
+    const empty = document.getElementById('emptyState');
+    const table = document.getElementById('submissionsTable');
+
+    /* stats */
+    const hoje = new Date().toLocaleDateString('pt-BR');
+    document.getElementById('statTotal').textContent   = list.length;
+    document.getElementById('statHoje').textContent    = list.filter(s => s.data && s.data.startsWith(hoje)).length + ' hoje';
+    document.getElementById('statStarter').textContent = list.filter(s => s.origem && s.origem.includes('Starter')).length;
+    document.getElementById('statPro').textContent     = list.filter(s => s.origem && s.origem.includes('Pro')).length;
+    document.getElementById('statLeads100').textContent = list.filter(s => s.leads_mes && s.leads_mes.includes('100')).length;
+
+    if (list.length === 0) {
+      table.style.display = 'none';
+      empty.style.display = 'block';
+      return;
+    }
+    table.style.display = '';
+    empty.style.display = 'none';
+
+    tbody.innerHTML = list.map(s => `
+      <tr>
+        <td>
+          <div class="name">${esc(s.nome || '—')}</div>
+          <div class="sub">${esc(s.email || '—')}</div>
+        </td>
+        <td>${esc(s.whatsapp || '—')}</td>
+        <td>${esc(s.creci || '—')}</td>
+        <td>${esc(s.cidade || '—')}</td>
+        <td>${esc(s.leads_mes || '—')}</td>
+        <td>${foco_pill(s.foco)}</td>
+        <td>${origem_pill(s.origem)}</td>
+        <td style="white-space:nowrap;color:var(--muted);font-size:.8rem">${esc(s.data || '—')}</td>
+        <td>
+          <button class="btn-del" onclick="deleteEntry(${s.id})" title="Remover">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>
+          </button>
+        </td>
+      </tr>
+    `).join('');
+  }
+
+  function esc(str) {
+    return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  /* ---- CSV Export ---- */
+  function exportCSV() {
+    const list = getSubmissions();
+    if (!list.length) { alert('Não há dados para exportar.'); return; }
+    const cols = ['data','nome','email','whatsapp','creci','cidade','leads_mes','foco','origem'];
+    const header = ['Data','Nome','E-mail','WhatsApp','CRECI','Cidade','Leads/mês','Foco','Origem'];
+    const rows = [header, ...list.map(s => cols.map(c => `"${(s[c]||'').replace(/"/g,'""')}"`))] ;
+    const csv = rows.map(r => r.join(',')).join('\n');
+    const blob = new Blob(['﻿'+csv], {type:'text/csv;charset=utf-8'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = `leadz_cadastros_${new Date().toISOString().slice(0,10)}.csv`;
+    a.click(); URL.revokeObjectURL(url);
+  }
+
+  /* ---- Init ---- */
+  function showDashboard() {
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('dashboard').classList.add('show');
+    renderTable();
+  }
+
+  if (sessionStorage.getItem(SESSION_KEY) === '1') {
+    showDashboard();
+  }
+</script>
+</body>
+</html>
